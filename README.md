@@ -29,9 +29,52 @@ The thesis is, if it builds *once*, it will always build.
 
 Make is used to define the various build targets and dependencies.
 
+### Example
+
 As an example, in order to build `libsqlite3`, this command would do:
 
 `make sqlite`
+
+Once it's done, the libraries are available at `/sqlite-build` in the container.
+
+```bash
+$ docker run --rm -it bad-libsqlite3
+root@bcd377ee512d:/sqlite# ls -la /sqlite-build/lib/
+total 6696
+drwxr-xr-x 3 root root    4096 Dec 11 09:34 .
+drwxr-xr-x 5 root root    4096 Dec 11 09:34 ..
+-rw-r--r-- 1 root root 4135994 Dec 11 09:34 libsqlite3.a
+-rwxr-xr-x 1 root root     943 Dec 11 09:34 libsqlite3.la
+lrwxrwxrwx 1 root root      19 Dec 11 09:34 libsqlite3.so -> libsqlite3.so.0.8.6
+lrwxrwxrwx 1 root root      19 Dec 11 09:34 libsqlite3.so.0 -> libsqlite3.so.0.8.6
+-rwxr-xr-x 1 root root 2701988 Dec 11 09:34 libsqlite3.so.0.8.6
+drwxr-xr-x 2 root root    4096 Dec 11 09:34 pkgconfig
+```
+If you need to, you can copy them to the host with a one-off `docker run` command like so:
+
+```bash
+$ docker run --rm -i -v `pwd`:/host bad-libsqlite3 cp -r /sqlite-build /host/
+```
+
+Now you should have all the files from the installation:
+
+```bash
+$ tree sqlite-build/
+sqlite-build/
+├── bin
+│   └── sqlite3
+├── include
+│   ├── sqlite3.h
+│   └── sqlite3ext.h
+└── lib
+    ├── libsqlite3.a
+    ├── libsqlite3.la
+    ├── libsqlite3.so -> libsqlite3.so.0.8.6
+    ├── libsqlite3.so.0 -> libsqlite3.so.0.8.6
+    ├── libsqlite3.so.0.8.6
+    └── pkgconfig
+        └── sqlite3.pc
+```
 
 ## Dependencies
 
