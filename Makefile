@@ -9,3 +9,6 @@ iconv:
 
 geos:
 	docker build -t bad-libgeos -f Dockerfile.geos .
+
+spatialite: sqlite proj iconv geos
+	docker build -t bad-libspatialite -f Dockerfile.spatialite .
