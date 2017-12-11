@@ -18,12 +18,12 @@ Sometimes it would be nice to just have a sure-fire way of getting a hold of
 that elusive library, without having to get into different toolchains, build
 systems etc. etc.
 
-That is what this project aims to accomplish. By using docker, it's possible to
+That is what this project aims to accomplish. By using [**docker**](https://www.docker.com), it's possible to
 lock down a specific enviroment with just the right dependencies met, in order
 to successfully build a specific native library for the architecture of your
 choice.
 
-The thesis is, if it builds *once*, it will always build.
+The thesis is, if it builds *once*, it will *always* build.
 
 ## Building
 
@@ -31,7 +31,7 @@ Make is used to define the various build targets and dependencies.
 
 ### Example
 
-As an example, in order to build `libsqlite3`, this command would do:
+As an example, in order to build **libsqlite3**, this command would do:
 
 `make sqlite`
 
@@ -78,7 +78,7 @@ sqlite-build/
 
 ## Dependencies
 
-First and foremost docker. See
+First and foremost **docker**. See
 [https://docs.docker.com/engine/installation](https://docs.docker.com/engine/installation) for installation instructions.
 
 Besides this, most Dockerfiles uses a containerised NDK toolchain build with
