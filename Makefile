@@ -6,3 +6,6 @@ proj:
 
 iconv:
 	docker build -t bad-libiconv -f Dockerfile.iconv .
+
+geos:
+	docker build -t bad-libgeos -f Dockerfile.geos .
