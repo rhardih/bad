@@ -12,3 +12,6 @@ geos:
 
 spatialite: sqlite proj iconv geos
 	docker build -t bad-libspatialite -f Dockerfile.spatialite .
+
+openssl:
+	docker build -t bad-libssl -f Dockerfile.openssl .
