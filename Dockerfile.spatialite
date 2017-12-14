@@ -1,14 +1,14 @@
-FROM bad-libsqlite3:latest AS sqlite-bd
-FROM bad-libproj:latest AS proj-bd
-FROM bad-libiconv:latest AS iconv-bd
-FROM bad-libgeos:latest AS geos-bd
+FROM bad-libsqlite3:latest AS sqlite-dep
+FROM bad-libproj:latest AS proj-dep
+FROM bad-libiconv:latest AS iconv-dep
+FROM bad-libgeos:latest AS geos-dep
 
 FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
 
-COPY --from=sqlite-bd /sqlite-build /sqlite-build
-COPY --from=proj-bd /proj-build /proj-build
-COPY --from=iconv-bd /iconv-build /iconv-build
-COPY --from=geos-bd /geos-build /geos-build
+COPY --from=sqlite-dep /sqlite-build /sqlite-build
+COPY --from=proj-dep /proj-build /proj-build
+COPY --from=iconv-dep /iconv-build /iconv-build
+COPY --from=geos-dep /geos-build /geos-build
 
 RUN apt-get update && apt-get -y install \
   wget \
