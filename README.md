@@ -31,11 +31,11 @@ Make is used to define the various build targets and dependencies.
 
 ### Example
 
-As an example, in order to build **libsqlite3**, this command would do:
+In order to build **libsqlite3**, this command would do:
 
 `make sqlite`
 
-Once it's done, the libraries are available at `/sqlite-build` in the container.
+Once it's done, the libraries are available under the install target, `/sqlite-build`, within the container.
 
 ```bash
 $ docker run --rm -it bad-libsqlite3
@@ -86,4 +86,4 @@ Besides this, most Dockerfiles uses a containerised NDK toolchain build with
 toolchains can be seen at
 [https://hub.docker.com/r/rhardih/stand/tags](https://hub.docker.com/r/rhardih/stand/tags)
 and new ones can be be created using [By](https://github.com/rhardih/by),
-available at [https://stand.rhardih.io](https://stand.rhardih.io).
+available at [https://standby.rhardih.io](https://standby.rhardih.io).
