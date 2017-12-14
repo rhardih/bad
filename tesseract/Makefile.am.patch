@@ -1,0 +1,10 @@
+--- a/api/Makefile.am	2017-12-14 19:34:48.000000000 +0100
++++ b/api/Makefile.am	2017-12-14 18:34:52.000000000 +0100
+@@ -80,6 +80,7 @@
+ 
+ 
+ tesseract_LDFLAGS = $(OPENCL_LDFLAGS)
++tesseract_LDADD += $(LEPTONICA_LIBS)
+ 
+ if T_WIN
+ tesseract_LDADD += -lws2_32 -ltiff

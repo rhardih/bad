@@ -15,3 +15,9 @@ spatialite: sqlite proj iconv geos
 
 openssl:
 	docker build -t bad-libssl -f Dockerfile.openssl .
+
+leptonica:
+	docker build -t bad-liblept -f Dockerfile.leptonica .
+
+tesseract: leptonica
+	docker build -t bad-libtesseract -f Dockerfile.tesseract .
