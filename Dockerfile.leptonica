@@ -8,7 +8,7 @@ RUN apt-get update && apt-get -y install \
 
 RUN wget -O 1.74.4.tar.gz \
       https://github.com/DanBloomberg/leptonica/archive/1.74.4.tar.gz && \
-			tar -xzvf 1.74.4.tar.gz && \
+      tar -xzvf 1.74.4.tar.gz && \
       rm 1.74.4.tar.gz
 
 WORKDIR /leptonica-1.74.4

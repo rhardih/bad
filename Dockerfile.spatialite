@@ -42,13 +42,13 @@ RUN wget -O config.sub \
   https://raw.githubusercontent.com/gcc-mirror/gcc/master/config.sub
 
 RUN CFLAGS=$(pkg-config sqlite3 proj --libs --cflags) \
-	CFLAGS="$CFLAGS -I/iconv-build/include -L/iconv-build/lib -liconv" \
-	CFLAGS="$CFLAGS -I/geos-build/include -L/geos-build/lib -lgeos" \
-	CFLAGS="$CFLAGS -L/android-21-toolchain/sysroot/usr/lib -llog" \
-  ./configure --host=arm-linux-androideabi \
-  --target=android \
-  --disable-freexl \
-  --disable-libxml2 \
-	--prefix=/spatialite-build/
+           CFLAGS="$CFLAGS -I/iconv-build/include -L/iconv-build/lib -liconv" \
+           CFLAGS="$CFLAGS -I/geos-build/include -L/geos-build/lib -lgeos" \
+           CFLAGS="$CFLAGS -L/android-21-toolchain/sysroot/usr/lib -llog" \
+           ./configure --host=arm-linux-androideabi \
+           --target=android \
+           --disable-freexl \
+           --disable-libxml2 \
+           --prefix=/spatialite-build/
 
 RUN make && make install

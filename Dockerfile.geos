@@ -5,7 +5,7 @@ RUN apt-get update && apt-get -y install \
   bzip2
 
 RUN wget -O geos-3.6.2.tar.bz2 http://download.osgeo.org/geos/geos-3.6.2.tar.bz2 && \
-			tar -xjvf geos-3.6.2.tar.bz2 && \
+      tar -xjvf geos-3.6.2.tar.bz2 && \
       rm geos-3.6.2.tar.bz2
 
 WORKDIR /geos-3.6.2

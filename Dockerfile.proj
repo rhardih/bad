@@ -4,7 +4,7 @@ RUN apt-get update && apt-get -y install \
   wget
 
 RUN wget -O proj-4.9.3.tar.gz http://download.osgeo.org/proj/proj-4.9.3.tar.gz && \
-			tar -xzvf proj-4.9.3.tar.gz && \
+      tar -xzvf proj-4.9.3.tar.gz && \
       rm proj-4.9.3.tar.gz
 
 WORKDIR /proj-4.9.3

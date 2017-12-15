@@ -4,7 +4,7 @@ RUN apt-get update && apt-get -y install \
   wget
 
 RUN wget -O libiconv-1.15.tar.gz https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz && \
-			tar -xzvf libiconv-1.15.tar.gz && \
+      tar -xzvf libiconv-1.15.tar.gz && \
       rm libiconv-1.15.tar.gz
 
 WORKDIR /libiconv-1.15

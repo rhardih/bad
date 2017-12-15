@@ -5,7 +5,7 @@ RUN apt-get update && apt-get -y install \
   tcl
 
 RUN wget -O sqlite.tar.gz https://www.sqlite.org/src/tarball/sqlite.tar.gz?r=release && \
-			tar -xzvf sqlite.tar.gz && \
+      tar -xzvf sqlite.tar.gz && \
       rm sqlite.tar.gz
 
 WORKDIR /sqlite
