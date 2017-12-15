@@ -35,11 +35,11 @@ In order to build **libsqlite3**, this command would do:
 
 `make sqlite3`
 
-Once it's done, the libraries are available under the install target, `/sqlite-build`, within the container.
+Once it's done, the libraries are available under the install target, `/sqlite3-build`, within the container.
 
 ```bash
 $ docker run --rm -it bad-libsqlite3
-root@bcd377ee512d:/sqlite# ls -la /sqlite-build/lib/
+root@bcd377ee512d:/sqlite# ls -la /sqlite3-build/lib/
 total 6696
 drwxr-xr-x 3 root root    4096 Dec 11 09:34 .
 drwxr-xr-x 5 root root    4096 Dec 11 09:34 ..
@@ -50,17 +50,27 @@ lrwxrwxrwx 1 root root      19 Dec 11 09:34 libsqlite3.so.0 -> libsqlite3.so.0.8
 -rwxr-xr-x 1 root root 2701988 Dec 11 09:34 libsqlite3.so.0.8.6
 drwxr-xr-x 2 root root    4096 Dec 11 09:34 pkgconfig
 ```
-If you need to, you can copy them to the host with a one-off `docker run` command like so:
+
+If you need to, you can copy them to the host using the included extraction
+script. The script is available as a built-in
+**[sub](https://github.com/basecamp/sub)** command. First make the
+**bad** command available, by initalising the sub like so:
 
 ```bash
-$ docker run --rm -i -v `pwd`:/host bad-libsqlite3 cp -r /sqlite-build /host/
+$ eval "$(.bad/bin/bad init -)"
+```
+
+Then issue the sub command *extract*, e.g:
+
+```bash
+bad extract sqlite3
 ```
 
 Now you should have all the files from the installation:
 
 ```bash
-$ tree sqlite-build/
-sqlite-build/
+$ tree sqlite3-build/
+sqlite3-build/
 ├── bin
 │   └── sqlite3
 ├── include
@@ -74,6 +84,12 @@ sqlite-build/
     ├── libsqlite3.so.0.8.6
     └── pkgconfig
         └── sqlite3.pc
+```
+
+Alternatively you can run the same docker command directly yourself:
+
+```bash
+$ docker run --rm -i -v `pwd`:/host bad-libsqlite3 cp -r /sqlite3-build /host/
 ```
 
 ## Dependencies
