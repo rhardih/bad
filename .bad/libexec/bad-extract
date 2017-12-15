@@ -13,11 +13,11 @@ docker info > /dev/null 2>&1
 
 # Provide bad completions
 if [[ "$1" = "--complete" ]]; then
-  docker images | grep 'bad-' | awk '{print $1'} | sed 's/bad-lib//'
+  docker images | grep 'bad-' | awk '{print $1'} | sed 's/bad-//'
   exit 0
 fi
 
-docker run --rm -i -v `pwd`:/host "bad-lib$1" cp -r "/$1-build/." \
+docker run --rm -i -v `pwd`:/host "bad-$1" cp -r "/$1-build/." \
   "/host/$1-build"
 
 echo "Extracted $1 library files to ./$1-build"

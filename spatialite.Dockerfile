@@ -1,7 +1,7 @@
-FROM bad-libsqlite3:latest AS sqlite3-dep
-FROM bad-libproj:latest AS proj-dep
-FROM bad-libiconv:latest AS iconv-dep
-FROM bad-libgeos:latest AS geos-dep
+FROM bad-sqlite3:latest AS sqlite3-dep
+FROM bad-proj:latest AS proj-dep
+FROM bad-iconv:latest AS iconv-dep
+FROM bad-geos:latest AS geos-dep
 
 FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
 

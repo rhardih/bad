@@ -1,4 +1,4 @@
-FROM bad-liblept:latest AS leptonica-dep
+FROM bad-leptonica:latest AS leptonica-dep
 
 FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
 
