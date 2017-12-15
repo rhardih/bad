@@ -1,5 +1,5 @@
-sqlite:
-	docker build -t bad-libsqlite3 -f sqlite.Dockerfile .
+sqlite3:
+	docker build -t bad-libsqlite3 -f sqlite3.Dockerfile .
 
 proj:
 	docker build -t bad-libproj -f proj.Dockerfile .
@@ -10,7 +10,7 @@ iconv:
 geos:
 	docker build -t bad-libgeos -f geos.Dockerfile .
 
-spatialite: sqlite proj iconv geos
+spatialite: sqlite3 proj iconv geos
 	docker build -t bad-libspatialite -f spatialite.Dockerfile .
 
 openssl:

@@ -20,7 +20,7 @@ RUN wget -O config.guess \
 RUN wget -O config.sub \
   https://raw.githubusercontent.com/gcc-mirror/gcc/master/config.sub
 
-RUN ./configure --host=arm-linux-androideabi --prefix=/sqlite-build/ \
+RUN ./configure --host=arm-linux-androideabi --prefix=/sqlite3-build/ \
   --disable-tcl
 
 RUN make && make install

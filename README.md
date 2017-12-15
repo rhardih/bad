@@ -33,7 +33,7 @@ Make is used to define the various build targets and dependencies.
 
 In order to build **libsqlite3**, this command would do:
 
-`make sqlite`
+`make sqlite3`
 
 Once it's done, the libraries are available under the install target, `/sqlite-build`, within the container.
 

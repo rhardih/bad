@@ -1,11 +1,11 @@
-FROM bad-libsqlite3:latest AS sqlite-dep
+FROM bad-libsqlite3:latest AS sqlite3-dep
 FROM bad-libproj:latest AS proj-dep
 FROM bad-libiconv:latest AS iconv-dep
 FROM bad-libgeos:latest AS geos-dep
 
 FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
 
-COPY --from=sqlite-dep /sqlite-build /sqlite-build
+COPY --from=sqlite3-dep /sqlite3-build /sqlite3-build
 COPY --from=proj-dep /proj-build /proj-build
 COPY --from=iconv-dep /iconv-build /iconv-build
 COPY --from=geos-dep /geos-build /geos-build
@@ -28,7 +28,7 @@ WORKDIR /libspatialite-4.3.0a
 ENV PATH $PATH:/android-21-toolchain/bin
 ENV PATH $PATH:/geos-build/bin
 
-ENV PKG_CONFIG_PATH /sqlite-build/lib/pkgconfig:/proj-build/lib/pkgconfig
+ENV PKG_CONFIG_PATH /sqlite3-build/lib/pkgconfig:/proj-build/lib/pkgconfig
 
 # Update "missing" script to avoid error:
 # libspatialite-4.3.0a/missing: Unknown `--is-lightweight' option
