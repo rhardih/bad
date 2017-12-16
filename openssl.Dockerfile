@@ -3,12 +3,15 @@ FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
 RUN apt-get update && apt-get -y install \
       wget
 
-RUN wget -O openssl-1.1.0g.tar.gz \
-      https://www.openssl.org/source/openssl-1.1.0g.tar.gz && \
-      tar -xzvf openssl-1.1.0g.tar.gz && \
-      rm openssl-1.1.0g.tar.gz
+RUN ls && wget https://www.openssl.org/source/openssl-1.0.2n.tar.gz && \
+      wget https://www.openssl.org/source/openssl-1.0.2n.tar.gz.sha1 && \
+      sed 's/$/  openssl-1.0.2n.tar.gz/' openssl-1.0.2n.tar.gz.sha1 > openssl.sha1 && \
+      sha1sum -c openssl.sha1 && \
+      tar -xzvf openssl-1.0.2n.tar.gz && \
+      rm openssl-1.0.2n.tar.gz && \
+      rm openssl-1.0.2n.tar.gz.sha1 openssl.sha1
 
-WORKDIR /openssl-1.1.0g
+WORKDIR /openssl-1.0.2n
 
 ENV PATH $PATH:/android-21-toolchain/bin
 
@@ -19,7 +22,7 @@ ENV ANDROID_ARCH arch-arm
 ENV ANDROID_EABI arm-linux-androideabi-4.9
 ENV ANDROID_API android-21
 
-ENV CROSS_SYSROOT /android-21-toolchain/sysroot
+ENV ANDROID_TOOLCHAIN /android-21-toolchain/bin
 
 # Defaults
 ENV MACHINE armv7
@@ -28,11 +31,12 @@ ENV SYSTEM android
 ENV ARCH arm
 ENV CROSS_COMPILE arm-linux-androideabi-
 
-ENV ANDROID_DEV $SYSROOT/usr
+ENV ANDROID_DEV /android-21-toolchain/usr
 
-RUN ./config shared no-ssl3 no-comp no-hw no-engine
+RUN ./Configure shared android-armv7 \
+      --prefix=/openssl-build/ \
+      --openssldir=/openssl-build/
 
-RUN ./Configure --prefix=/openssl-build/ \
-  shared android
-
-RUN make -j && make install
+RUN make -j depend && \
+      make -j CALC_VERSIONS="SHLIB_COMPAT=; SHLIB_SOVER=" build_libs && \
+      make install
