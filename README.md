@@ -1,6 +1,6 @@
 # bad
 
-**Building for Android with Docker**
+**[B](https://github.com/rhardih/bad)uilding for [A](https://github.com/rhardih/bad)ndroid with [D](https://github.com/rhardih/bad)ocker**
 
 This is a collection of Dockerfiles, for building various native libraries using
 the Android NDK.
@@ -11,7 +11,7 @@ Cross compiling native libraries can sometimes be a
 [**pita**](https://www.urbandictionary.com/define.php?term=pita). More often than
 not, you'll need architecture specific versions of dependent libraries in order
 to succeed and you'll quickly find yourself cross compiling those dependencies,
-as well as the dependencies' dependencies, and so on and so forth. Down the
+as well as the their dependencies, and so on and so forth. Down the
 rabbit hole we go.
 
 Sometimes it would be nice to just have a sure-fire way of getting a hold of
@@ -23,7 +23,7 @@ lock down a specific enviroment with just the right dependencies met, in order
 to successfully build a specific native library for the architecture of your
 choice.
 
-The thesis is, if it builds *once*, it will *always* build.
+The assumption is, if it builds *once*, it will *always* build.
 
 ## Building
 
@@ -86,7 +86,7 @@ sqlite3-build/
         └── sqlite3.pc
 ```
 
-Alternatively you can run the same docker command directly yourself:
+**Alternatively** you can run the same docker command directly yourself:
 
 ```bash
 $ docker run --rm -i -v `pwd`:/host bad-libsqlite3 cp -r /sqlite3-build /host/
