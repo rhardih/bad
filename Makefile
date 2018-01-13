@@ -21,3 +21,6 @@ leptonica:
 
 tesseract: leptonica
 	docker build -t bad-tesseract -f tesseract.Dockerfile .
+
+opencv: leptonica tesseract
+	docker build -t bad-opencv -f opencv.Dockerfile .
