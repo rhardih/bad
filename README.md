@@ -35,6 +35,10 @@ In order to build **libsqlite3**, this command would do:
 
 `make sqlite3`
 
+Note, extra options for `docker build`, can be passed via `BUILD_ARGS` e.g.:
+
+`make BUILD_ARGS="--no-cache" sqlite3`
+
 Once it's done, the libraries are available under the install target, `/sqlite3-build`, within the container.
 
 ```bash
@@ -64,7 +68,6 @@ Then issue the sub command *extract*, e.g:
 
 ```bash
 bad extract sqlite3
-```
 
 Now you should have all the files from the installation:
 
