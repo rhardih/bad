@@ -19,7 +19,7 @@ openssl:
 tiff:
 	docker build -t bad-tiff -f tiff.Dockerfile .
 
-leptonica:
+leptonica: tiff
 	docker build -t bad-leptonica -f leptonica.Dockerfile .
 
 tesseract: leptonica

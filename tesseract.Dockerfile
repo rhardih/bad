@@ -1,7 +1,9 @@
+FROM bad-tiff:latest AS tiff-dep
 FROM bad-leptonica:latest AS leptonica-dep
 
 FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
 
+COPY --from=tiff-dep /tiff-build /tiff-build
 COPY --from=leptonica-dep /leptonica-build /leptonica-build
 
 RUN apt-get update && apt-get -y install \
