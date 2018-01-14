@@ -16,6 +16,9 @@ spatialite: sqlite3 proj iconv geos
 openssl:
 	docker build -t bad-openssl -f openssl.Dockerfile .
 
+tiff:
+	docker build -t bad-tiff -f tiff.Dockerfile .
+
 leptonica:
 	docker build -t bad-leptonica -f leptonica.Dockerfile .
 
