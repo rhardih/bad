@@ -1,5 +1,8 @@
 FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
 
+# List of available versions can be found at
+# ftp://download.osgeo.org/libtiff
+# ftp://download.osgeo.org/libtiff/old
 ARG VERSION=4.0.9
 
 RUN apt-get update && apt-get -y install \

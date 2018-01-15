@@ -40,14 +40,28 @@ openssl/%:
 openssl:
 	make openssl/1.0.2n
 
+tiff/%:
+	docker build --build-arg VERSION=${@F} -t bad-tiff:${@F} \
+		-f tiff.Dockerfile ${BUILD_ARGS} .
+
 tiff:
-	docker build -t bad-tiff -f tiff.Dockerfile ${BUILD_ARGS} .
+	make tiff/4.0.9
 
-leptonica: tiff
-	docker build -t bad-leptonica -f leptonica.Dockerfile ${BUILD_ARGS} .
+leptonica/%: tiff/4.0.9
+	docker build --build-arg VERSION=${@F} -t bad-leptonica:${@F} \
+		-f leptonica.Dockerfile ${BUILD_ARGS} .
 
-tesseract: leptonica
-	docker build -t bad-tesseract -f tesseract.Dockerfile ${BUILD_ARGS} .
+leptonica:
+	make leptonica/1.74.4
+
+tesseract/%: leptonica/1.74.4
+	docker build --build-arg VERSION=${@F} -t bad-tesseract:${@F} \
+		-f tesseract.Dockerfile ${BUILD_ARGS} .
+
+tesseract:
+	make tesseract/3.05.01
 
 opencv: leptonica tesseract
 	docker build -t bad-opencv -f opencv.Dockerfile ${BUILD_ARGS} .
+
+.PHONY: tesseract
