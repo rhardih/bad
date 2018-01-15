@@ -5,14 +5,26 @@ sqlite3/%:
 sqlite3:
 	make sqlite3/3.21.0
 
+proj/%:
+	docker build --build-arg VERSION=${@F} -t bad-proj:${@F} \
+		-f proj.Dockerfile ${BUILD_ARGS} .
+
 proj:
-	docker build -t bad-proj -f proj.Dockerfile ${BUILD_ARGS} .
+	make proj/4.9.3
+
+iconv/%:
+	docker build --build-arg VERSION=${@F} -t bad-iconv:${@F} \
+		-f iconv.Dockerfile ${BUILD_ARGS} .
 
 iconv:
-	docker build -t bad-iconv -f iconv.Dockerfile ${BUILD_ARGS} .
+	make iconv/1.15
+
+geos/%:
+	docker build --build-arg VERSION=${@F} -t bad-geos:${@F} \
+		-f geos.Dockerfile ${BUILD_ARGS} .
 
 geos:
-	docker build -t bad-geos -f geos.Dockerfile ${BUILD_ARGS} .
+	make geos/3.6.2
 
 spatialite: sqlite3 proj iconv geos
 	docker build -t bad-spatialite -f spatialite.Dockerfile ${BUILD_ARGS} .
