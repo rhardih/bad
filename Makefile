@@ -1,5 +1,9 @@
+sqlite3/%:
+	docker build --build-arg VERSION=${@F} -t bad-sqlite3:${@F} \
+		-f sqlite3.Dockerfile ${BUILD_ARGS} .
+
 sqlite3:
-	docker build -t bad-sqlite3 -f sqlite3.Dockerfile ${BUILD_ARGS} .
+	make sqlite3/3.21.0
 
 proj:
 	docker build -t bad-proj -f proj.Dockerfile ${BUILD_ARGS} .

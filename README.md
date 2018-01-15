@@ -94,6 +94,15 @@ sqlite3-build/
 ```bash
 $ docker run --rm -i -v `pwd`:/host bad-libsqlite3 cp -r /sqlite3-build /host/
 ```
+### Versions
+
+For some make rules it's possible to build specific versions of a target using
+the following form:
+
+`make sqlite3/3.21.0`
+
+Check the [Makefile](https://github.com/rhardih/bad/blob/master/Makefile) to see
+which ones.
 
 ## Dependencies
 
