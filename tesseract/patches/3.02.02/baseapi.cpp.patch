@@ -1,0 +1,31 @@
+--- a/api/baseapi.cpp   2018-01-13 20:36:47.054236998 +0000
++++ b/api/baseapi.cpp   2018-01-13 20:47:55.789701918 +0000
+@@ -62,7 +62,9 @@
+ #include <windows.h>
+ #include <stdlib.h>
+ #else
++#ifndef __ANDROID__
+ #include <glob.h>
++#endif
+ #include <libgen.h>
+ #include <string.h>
+ #endif
+@@ -308,6 +310,7 @@
+       FindClose(handle);
+     }
+ #else
++#ifndef __ANDROID__
+     glob_t pglob;
+     char **paths;
+     char *path, *dot;
+@@ -321,6 +324,10 @@
+       }
+       globfree(&pglob);
+     }
++#else
++    // Hardcode only eng.traineddata
++    langs->push_back(STRING("eng"));
++#endif
+ #endif
+   }
+ }

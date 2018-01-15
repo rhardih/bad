@@ -54,9 +54,16 @@ leptonica/%: tiff/4.0.9
 leptonica:
 	make leptonica/1.74.4
 
-tesseract/%: leptonica/1.74.4
-	docker build --build-arg VERSION=${@F} -t bad-tesseract:${@F} \
-		-f tesseract.Dockerfile ${BUILD_ARGS} .
+# Special case tesseract here, since different patches is needed in order for
+# different versions to compile.
+
+tesseract/3.02.02: tiff/4.0.9 leptonica/1.74.4
+	docker build -t bad-tesseract:3.02.02 \
+		-f tesseract/tesseract-3.02.02.Dockerfile ${BUILD_ARGS} .
+
+tesseract/3.05.01: tiff/4.0.9 leptonica/1.74.4
+	docker build -t bad-tesseract:3.05.01 \
+		-f tesseract/tesseract-3.05.01.Dockerfile ${BUILD_ARGS} .
 
 tesseract:
 	make tesseract/3.05.01
