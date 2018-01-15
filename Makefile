@@ -68,7 +68,11 @@ tesseract/3.05.01: tiff/4.0.9 leptonica/1.74.4
 tesseract:
 	make tesseract/3.05.01
 
-opencv: leptonica tesseract
-	docker build -t bad-opencv -f opencv.Dockerfile ${BUILD_ARGS} .
+opencv/%: leptonica/1.74.4 tesseract/3.02.02
+	docker build --build-arg VERSION=${@F} -t bad-opencv:${@F} \
+		-f opencv.Dockerfile ${BUILD_ARGS} .
+
+opencv:
+	make opencv/3.3.1
 
 .PHONY: tesseract
