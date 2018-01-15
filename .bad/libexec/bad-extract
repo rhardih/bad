@@ -13,17 +13,20 @@ docker info > /dev/null 2>&1
 
 # Provide bad completions
 if [[ "$1" = "--complete" ]]; then
-  docker images | grep 'bad-' | awk '{print $1'} | sed 's/bad-//'
+  docker images | grep 'bad-' | awk 'BEGIN {OFS="-"} { print $1, $2}' | sed 's/bad-//'
   exit 0
 fi
 
 mkdir -p extracted
 
 if [[ -d "extracted/$1-build" ]]; then
-  rm -rf "extracted/$1-build"
+  rm -r "extracted/$1-build"
 fi
 
-docker run --rm -i -v `pwd`/extracted:/host "bad-$1" cp -r "/$1-build/." \
-  "/host/$1-build"
+name="${1%-*}"
+tag="${1#*-}"
 
-echo "Extracted $1 library files to ./extracted/$1-build"
+docker run --rm -i -v `pwd`/extracted:/host "bad-$name:$tag" \
+  cp -r "/$name-build/." "/host/$name-$tag-build"
+
+echo "Extracted $name v. $tag, library files to ./extracted/$name-$tag-build"

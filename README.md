@@ -67,13 +67,17 @@ $ eval "$(.bad/bin/bad init -)"
 Then issue the sub command *extract*, e.g:
 
 ```bash
-bad extract sqlite3
+bad extract sqlite3-3.21.0
+```
 
-Now you should have all the files from the installation:
+Note, use tab-completion to show which targets can currently be extracted.
+
+Once done, you should have all the files from the installation, available under
+the subfolder *extracted*:
 
 ```bash
-$ tree sqlite3-build/
-sqlite3-build/
+$ tree extracted/sqlite3-3.21.0-build/
+extracted/sqlite3-3.21.0-build/
 ├── bin
 │   └── sqlite3
 ├── include
@@ -87,13 +91,17 @@ sqlite3-build/
     ├── libsqlite3.so.0.8.6
     └── pkgconfig
         └── sqlite3.pc
+
+4 directories, 9 files
 ```
 
 **Alternatively** you can run the same docker command directly yourself:
 
 ```bash
-$ docker run --rm -i -v `pwd`:/host bad-libsqlite3 cp -r /sqlite3-build /host/
+$ docker run --rm -i -v `pwd`/extracted:/host bad-libsqlite3:3.21.0 \
+  cp -r /sqlite3-build /host/sqlite3-3.21.0-build
 ```
+
 ### Versions
 
 For some make rules it's possible to build specific versions of a target using
@@ -107,7 +115,8 @@ which ones.
 ## Dependencies
 
 First and foremost **docker**. See
-[https://docs.docker.com/engine/installation](https://docs.docker.com/engine/installation) for installation instructions.
+[https://docs.docker.com/engine/installation](https://docs.docker.com/engine/installation)
+for installation instructions.
 
 Besides this, most Dockerfiles uses a containerised NDK toolchain build with
 [stand](https://github.com/rhardih/stand). A list of current available
