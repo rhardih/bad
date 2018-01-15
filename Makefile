@@ -26,8 +26,12 @@ geos/%:
 geos:
 	make geos/3.6.2
 
-spatialite: sqlite3 proj iconv geos
-	docker build -t bad-spatialite -f spatialite.Dockerfile ${BUILD_ARGS} .
+spatialite/%: sqlite3/3.21.0 proj/4.9.3 iconv/1.15 geos/3.6.2
+	docker build --build-arg VERSION=${@F} -t bad-spatialite:${@F} \
+		-f spatialite.Dockerfile ${BUILD_ARGS} .
+
+spatialite:
+	make spatialite/4.3.0a
 
 openssl:
 	docker build -t bad-openssl -f openssl.Dockerfile ${BUILD_ARGS} .
