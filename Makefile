@@ -33,8 +33,12 @@ spatialite/%: sqlite3/3.21.0 proj/4.9.3 iconv/1.15 geos/3.6.2
 spatialite:
 	make spatialite/4.3.0a
 
+openssl/%:
+	docker build --build-arg VERSION=${@F} -t bad-openssl:${@F} \
+		-f openssl.Dockerfile ${BUILD_ARGS} .
+
 openssl:
-	docker build -t bad-openssl -f openssl.Dockerfile ${BUILD_ARGS} .
+	make openssl/1.0.2n
 
 tiff:
 	docker build -t bad-tiff -f tiff.Dockerfile ${BUILD_ARGS} .
