@@ -19,12 +19,9 @@ RUN wget -O 3.02.02.tar.gz \
 
 WORKDIR /tesseract-3.02.02
 
-# Note this very lazy patch hardcodes 'eng' as the only available traineddata
-# for tesseract, due to glob.h missing in the Android NDK. I haven't bothered to
-# make a proper fix, since this isn't an issue in later versions.
-COPY tesseract/patches/3.02.02/baseapi.cpp.patch api/baseapi.cpp.patch
+COPY tesseract/patches/3.02.02/1 1
 
-RUN cd api && patch < baseapi.cpp.patch
+RUN patch -p1 < 1
 
 ENV PATH $PATH:/android-21-toolchain/bin
 ENV PKG_CONFIG_PATH /leptonica-build/lib/pkgconfig/
