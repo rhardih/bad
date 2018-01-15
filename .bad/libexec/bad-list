@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Usage: bad list
+# Summary: Show build targets available for extraction
+# Help: Provides a list of which libraries have been built and is available to
+# the `bad extract` sub command.
+#
+#    bad list
+# _
+
+set -e
+
+# Make sure docker is running first
+docker info > /dev/null 2>&1
+
+docker images | grep 'bad-' | awk 'BEGIN {OFS="-"} { print $1, $2}' | sed 's/bad-//'

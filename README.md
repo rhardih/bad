@@ -70,7 +70,8 @@ Then issue the sub command *extract*, e.g:
 bad extract sqlite3-3.21.0
 ```
 
-Note, use tab-completion to show which targets can currently be extracted.
+Note, in order to see which targets can currently be extracted, either use the
+built-in tab completion or use the related `bad list` sub command.
 
 Once done, you should have all the files from the installation, available under
 the subfolder *extracted*:
