@@ -46,11 +46,9 @@ RUN ./platforms/scripts/cmake_android_arm.sh \
   -D Tesseract_INCLUDE_DIR=/tesseract-build/include \
   -D Tesseract_LIBRARY=/tesseract-build/libtesseract.so \
   -D Lept_LIBRARY=/leptonica-build/lib/liblept.so \
+  -D 3P_LIBRARY_OUTPUT_PATH=/opencv-build/sdk/native/libs/armeabi-v7a/ \
   -D CMAKE_INSTALL_PREFIX:PATH=/opencv-build
 
 WORKDIR /opencv-$VERSION/platforms/build_android_arm
 
 RUN make -j2 && make install
-
-# Copy 3rdparty libs
-RUN cp 3rdparty/lib/armeabi-v7a/* /opencv-build/sdk/native/libs/armeabi-v7a/
