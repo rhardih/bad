@@ -1,6 +1,10 @@
-FROM bad-tiff:4.0.9 AS tiff-dep
+ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG HOST=arm-linux-androideabi
+ARG ARCH=armv7-a
 
-FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
+FROM bad-tiff:4.0.9-$ARCH AS tiff-dep
+
+FROM rhardih/stand:$STAND_TAG
 
 ARG VERSION=1.74.4
 
@@ -25,7 +29,7 @@ ENV PKG_CONFIG_PATH /tiff-build/lib/pkgconfig
 RUN ./autobuild
 
 RUN ./configure \
-  --host=arm-linux-androideabi \
+  --host=$HOST \
   --disable-programs \
   --without-zlib \
   --without-libpng \

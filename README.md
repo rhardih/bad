@@ -25,6 +25,16 @@ choice.
 
 The assumption is, if it builds *once*, it will *always* build.
 
+## Naming convention
+
+Containers are named according to the following convention:
+
+`bad-<name>:<version>-<architecture>`
+
+So as an example, the container to build an *armv7-a* version of **libsqlite3** v. 3.21.0, would have the following name:
+
+`bad-sqlite3:3.21.0-armv7-a`
+
 ## Building
 
 Make is used to define the various build targets and dependencies.

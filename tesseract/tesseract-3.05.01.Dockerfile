@@ -1,7 +1,11 @@
-FROM bad-tiff:4.0.9 AS tiff-dep
-FROM bad-leptonica:1.74.4 AS leptonica-dep
+ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG HOST=arm-linux-androideabi
+ARG ARCH=armv7-a
 
-FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
+FROM bad-tiff:4.0.9-$ARCH AS tiff-dep
+FROM bad-leptonica:1.74.4-$ARCH AS leptonica-dep
+
+FROM rhardih/stand:$STAND_TAG
 
 COPY --from=tiff-dep /tiff-build /tiff-build
 COPY --from=leptonica-dep /leptonica-build /leptonica-build
@@ -31,8 +35,8 @@ ENV PKG_CONFIG_PATH /leptonica-build/lib/pkgconfig/
 RUN ./autogen.sh
 
 RUN ./configure \
-  --host=arm-linux-androideabi \
+  --host=$HOST \
   --with-extra-libraries=/leptonica-build/lib \
   --prefix=/tesseract-build/
 
-RUN make -j2  && make install
+RUN make -j2 && make install

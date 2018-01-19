@@ -12,7 +12,7 @@
      powerpc-*-darwin*)
          OPENCL_LIBS=""
          ;;
-+    *androideabi*)
++    *android*)
 +        AM_CONDITIONAL([ADD_RT], false)
 +        ;;
      *)

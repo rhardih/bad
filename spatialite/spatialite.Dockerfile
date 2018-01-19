@@ -1,9 +1,14 @@
-FROM bad-sqlite3:3.21.0 AS sqlite3-dep
-FROM bad-proj:4.9.3 AS proj-dep
-FROM bad-iconv:1.15 AS iconv-dep
-FROM bad-geos:3.6.2 AS geos-dep
+ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG ARCH=armv7-a
 
-FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
+FROM bad-sqlite3:3.21.0-$ARCH AS sqlite3-dep
+FROM bad-proj:4.9.3-$ARCH AS proj-dep
+FROM bad-iconv:1.15-$ARCH AS iconv-dep
+FROM bad-geos:3.6.2-$ARCH AS geos-dep
+
+FROM rhardih/stand:$STAND_TAG
+
+ARG HOST=arm-linux-androideabi
 
 # List of available versions can be found at
 # http://www.gaia-gis.it/gaia-sins/libspatialite-sources/
@@ -46,13 +51,13 @@ RUN wget -O config.sub \
   https://raw.githubusercontent.com/gcc-mirror/gcc/master/config.sub
 
 RUN CFLAGS=$(pkg-config sqlite3 proj --libs --cflags) \
-           CFLAGS="$CFLAGS -I/iconv-build/include -L/iconv-build/lib -liconv" \
-           CFLAGS="$CFLAGS -I/geos-build/include -L/geos-build/lib -lgeos" \
-           CFLAGS="$CFLAGS -L/android-21-toolchain/sysroot/usr/lib -llog" \
-           ./configure --host=arm-linux-androideabi \
-           --target=android \
-           --disable-freexl \
-           --disable-libxml2 \
-           --prefix=/spatialite-build/
+  CFLAGS="$CFLAGS -I/iconv-build/include -L/iconv-build/lib -liconv" \
+  CFLAGS="$CFLAGS -I/geos-build/include -L/geos-build/lib -lgeos" \
+  CFLAGS="$CFLAGS -L/android-21-toolchain/sysroot/usr/lib -llog" \
+  ./configure --host=$HOST \
+  --target=android \
+  --disable-freexl \
+  --disable-libxml2 \
+  --prefix=/spatialite-build/
 
 RUN make && make install

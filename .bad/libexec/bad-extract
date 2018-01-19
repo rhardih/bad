@@ -13,7 +13,7 @@ docker info > /dev/null 2>&1
 
 # Provide bad completions
 if [[ "$1" = "--complete" ]]; then
-  docker images | grep 'bad-' | awk 'BEGIN {OFS="-"} { print $1, $2}' | sed 's/bad-//'
+  docker images | grep 'bad-' | awk 'BEGIN {OFS="/"} { print $1, $2}' | sed 's/bad-//'
   exit 0
 fi
 
@@ -23,10 +23,23 @@ if [[ -d "extracted/$1-build" ]]; then
   rm -r "extracted/$1-build"
 fi
 
-name="${1%-*}"
-tag="${1#*-}"
+# The naming convention is as follows:
+#
+# - Anything before '/' is considered the name.
+# - Anything after '/' but before a '-' is considered the version.
+# - Anything after '/' and '-' and the last, is considered to be the
+#   architecture string.
+name="${1%/*}"
+tag="${1#*/}"
+version="${tag%%-*}"
+arch="${tag#*-}"
+
+#echo $name
+#echo $tag
+#echo $version
+#echo $arch
 
 docker run --rm -i -v `pwd`/extracted:/host "bad-$name:$tag" \
   cp -r "/$name-build/." "/host/$name-$tag-build"
 
-echo "Extracted $name v. $tag, library files to ./extracted/$name-$tag-build"
+echo "Extracted $arch version of $name v. $version, library files to ./extracted/$name-$tag-build"

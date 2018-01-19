@@ -1,4 +1,7 @@
-FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
+ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG HOST=arm-linux-androideabi
+
+FROM rhardih/stand:$STAND_TAG
 
 # List of available versions can be found at
 # ftp://download.osgeo.org/libtiff
@@ -29,7 +32,7 @@ RUN wget -O config/config.sub \
 RUN ./autogen.sh
 
 RUN ./configure \
-      --host=arm-linux-androideabi \
+      --host=$HOST \
       --prefix=/tiff-build/
 
 RUN make && make install

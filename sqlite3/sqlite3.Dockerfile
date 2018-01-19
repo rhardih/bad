@@ -1,4 +1,8 @@
-FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
+ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+
+FROM rhardih/stand:$STAND_TAG
+
+ARG HOST=arm-linux-androideabi
 
 # List of available versions can be found at
 # https://www.sqlite.org/src/taglist
@@ -25,7 +29,9 @@ RUN wget -O config.guess \
 RUN wget -O config.sub \
   https://raw.githubusercontent.com/gcc-mirror/gcc/master/config.sub
 
-RUN ./configure --host=arm-linux-androideabi --prefix=/sqlite3-build/ \
-  --disable-tcl
+RUN ./configure \
+  --host=$HOST \
+  --disable-tcl \
+  --prefix=/sqlite3-build/
 
 RUN make && make install

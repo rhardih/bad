@@ -1,4 +1,8 @@
-FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
+ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+
+FROM rhardih/stand:$STAND_TAG
+
+ARG HOST=arm-linux-androideabi
 
 # List of available versions can be found at
 # http://download.osgeo.org/geos/
@@ -17,6 +21,8 @@ WORKDIR /geos-$VERSION
 
 ENV PATH $PATH:/android-21-toolchain/bin
 
-RUN ./configure --host=arm-linux-androideabi --prefix=/geos-build/
+RUN ./configure \
+  --host=$HOST \
+  --prefix=/geos-build/
 
 RUN make && make install
