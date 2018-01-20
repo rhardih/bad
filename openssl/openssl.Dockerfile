@@ -1,9 +1,21 @@
-FROM rhardih/stand:r10e--android-21--arm-linux-androideabi-4.9
+ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+
+FROM rhardih/stand:$STAND_TAG
 
 # List of available versions can be found at
 # https://www.openssl.org/source/
 # https://www.openssl.org/source/old/
-ARG VERSION=1.0.2.n
+ARG VERSION=1.0.2n
+
+# This is a base set of environment variables as seen in
+# https://wiki.openssl.org/images/7/70/Setenv-android.sh
+ARG ANDROID_EABI=arm-linux-androideabi-4.9
+ARG ANDROID_API=android-21
+ARG MACHINE=armv7
+ARG SYSTEM=android
+ARG ARCH=arm
+ARG CROSS_COMPILE=arm-linux-androideabi-
+ARG OS_COMPILER=android-armv7
 
 RUN apt-get update && apt-get -y install \
   wget
@@ -19,29 +31,21 @@ RUN wget -O openssl-$VERSION.tar.gz \
 
 WORKDIR /openssl-$VERSION
 
-ENV PATH $PATH:/android-21-toolchain/bin
+ENV PATH=$PATH:/$ANDROID_API-toolchain/bin \
+  ANDROID_ARCH=android-$ARCH \
+  ANDROID_EABI=$ANDROID_EABI \
+  ANDROID_API=$ANDROID_API \
+  ANDROID_TOOLCHAIN=/$ANDROID_API-toolchain/bin \
+  MACHINE=$MACHINE \
+  SYSTEM=$SYSTEM \
+  ARCH=$ARCH \
+  CROSS_COMPILE=$CROSS_COMPILE \
+  ANDROID_DEV=/$ANDROID_API-toolchain/usr
 
-# This is a base set of envrironment variables as seen in
-# https://wiki.openssl.org/images/7/70/Setenv-android.sh
-
-ENV ANDROID_ARCH arch-arm
-ENV ANDROID_EABI arm-linux-androideabi-4.9
-ENV ANDROID_API android-21
-
-ENV ANDROID_TOOLCHAIN /android-21-toolchain/bin
-
-# Defaults
-ENV MACHINE armv7
-ENV RELEASE 2.6.37
-ENV SYSTEM android
-ENV ARCH arm
-ENV CROSS_COMPILE arm-linux-androideabi-
-
-ENV ANDROID_DEV /android-21-toolchain/usr
-
-RUN ./Configure shared android-armv7 \
+RUN ./Configure \
   --prefix=/openssl-build/ \
-  --openssldir=/openssl-build/
+  --openssldir=/openssl-build/ \
+  shared $OS_COMPILER
 
 # CALC_VERSIONS is set in order to build versionless copies since Android
 # doesn't support versioned shared libs.

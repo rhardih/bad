@@ -23,12 +23,10 @@ include spatialite/spatialite.mk
 spatialite:
 	make spatialite-armv7-a/4.3.0a
 
-openssl/%:
-	docker build --build-arg VERSION=${@F} -t bad-openssl:${@F} \
-		-f openssl.Dockerfile ${BUILD_ARGS} .
+include openssl/openssl.mk
 
 openssl:
-	make openssl/1.0.2n
+	make openssl-armv7-a/1.0.2n
 
 include tiff/tiff.mk
 
@@ -52,4 +50,4 @@ opencv/%: leptonica/1.74.4 tesseract/3.02.02
 opencv:
 	make opencv/3.3.1
 
-.PHONY: sqlite3 proj iconv geos spatialite tiff leptonica tesseract
+.PHONY: sqlite3 proj iconv geos spatialite openssl tiff leptonica tesseract
