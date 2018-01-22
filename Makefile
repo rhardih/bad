@@ -43,11 +43,10 @@ include tesseract/tesseract.mk
 tesseract:
 	make tesseract-armv7-a/3.05.01
 
-opencv/%: leptonica/1.74.4 tesseract/3.02.02
-	docker build --build-arg VERSION=${@F} -t bad-opencv:${@F} \
-		-f opencv.Dockerfile ${BUILD_ARGS} .
+include opencv/opencv.mk
 
 opencv:
-	make opencv/3.3.1
+	make opencv-armv7-a/3.3.1
 
-.PHONY: sqlite3 proj iconv geos spatialite openssl tiff leptonica tesseract
+.PHONY: sqlite3 proj iconv geos spatialite openssl tiff leptonica tesseract \
+	opencv
