@@ -1,5 +1,4 @@
 ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
-ARG HOST=arm-linux-androideabi
 
 FROM rhardih/stand:$STAND_TAG
 
@@ -7,6 +6,7 @@ FROM rhardih/stand:$STAND_TAG
 # ftp://download.osgeo.org/libtiff
 # ftp://download.osgeo.org/libtiff/old
 ARG VERSION=4.0.9
+ARG HOST=arm-linux-androideabi
 
 RUN apt-get update && apt-get -y install \
   wget \
@@ -35,4 +35,4 @@ RUN ./configure \
       --host=$HOST \
       --prefix=/tiff-build/
 
-RUN make && make install
+RUN make -j2 && make install
