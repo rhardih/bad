@@ -10,7 +10,9 @@ ARG VERSION=3.21.0
 
 RUN apt-get update && apt-get -y install \
   wget \
-  tcl
+  tcl \
+  autoconf \
+  libtool
 
 RUN wget -O sqlite-$VERSION.tar.gz \
   https://www.sqlite.org/src/tarball/sqlite.tar.gz?r=version-$VERSION && \
@@ -29,9 +31,14 @@ RUN wget -O config.guess \
 RUN wget -O config.sub \
   https://raw.githubusercontent.com/gcc-mirror/gcc/master/config.sub
 
+# Patch Makefile.am in order to create unversioned library
+COPY sqlite3/patches/Makefile.am.patch Makefile.am.patch
+RUN patch autoconf/Makefile.am < Makefile.am.patch
+RUN autoreconf -vfi
+
 RUN ./configure \
   --host=$HOST \
   --disable-tcl \
   --prefix=/sqlite3-build/
 
-RUN make && make install
+RUN make -j2  && make install

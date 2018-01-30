@@ -1,0 +1,11 @@
+--- autoconf/Makefile.am	2017-10-24 18:55:49.000000000 +0000
++++ Makefile.am	2018-01-30 16:55:36.104773667 +0000
+@@ -3,7 +3,7 @@
+ 
+ lib_LTLIBRARIES = libsqlite3.la
+ libsqlite3_la_SOURCES = sqlite3.c
+-libsqlite3_la_LDFLAGS = -no-undefined -version-info 8:6:8
++libsqlite3_la_LDFLAGS = -no-undefined -avoid-version
+ 
+ bin_PROGRAMS = sqlite3
+ sqlite3_SOURCES = shell.c sqlite3.h
