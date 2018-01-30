@@ -46,7 +46,7 @@ tesseract:
 include opencv/opencv.mk
 
 opencv:
-	make opencv-armv7-a/3.3.1
+	make opencv-armv7-a/3.4.0
 
 .PHONY: sqlite3 proj iconv geos spatialite openssl tiff leptonica tesseract \
 	opencv
