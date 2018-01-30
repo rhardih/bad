@@ -11,6 +11,7 @@ ARG HOST=arm-linux-androideabi
 ARG ANDROID_ABI=armeabi-v7a
 ARG SCRIPT_NAME=cmake_android_arm
 ARG SCRIPT_ARCH=arm
+ARG WITH_OPENCL=ON
 
 COPY --from=leptonica-dep /leptonica-build /leptonica-build
 COPY --from=tesseract-dep /tesseract-build /tesseract-build
@@ -53,6 +54,7 @@ RUN ./platforms/scripts/$SCRIPT_NAME.sh \
   -D Tesseract_LIBRARY=/tesseract-build/libtesseract.so \
   -D Lept_LIBRARY=/leptonica-build/lib/liblept.so \
   -D 3P_LIBRARY_OUTPUT_PATH=/opencv-build/sdk/native/libs/$ANDROID_ABI/ \
+  -D WITH_OPENCL=$WITH_OPENCL \
   -D CMAKE_INSTALL_PREFIX:PATH=/opencv-build
 
 WORKDIR /opencv-$VERSION/platforms/build_android_$SCRIPT_ARCH
