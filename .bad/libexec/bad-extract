@@ -20,7 +20,7 @@ fi
 mkdir -p extracted
 
 if [[ -d "extracted/$1-build" ]]; then
-  rm -r "extracted/$1-build"
+  rm -rf "extracted/$1-build"
 fi
 
 # The naming convention is as follows:
