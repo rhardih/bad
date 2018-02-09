@@ -48,5 +48,15 @@ include opencv/opencv.mk
 opencv:
 	make opencv-armv7-a/3.4.0
 
+include expat/expat.mk
+
+expat:
+	make expat-armv7-a/2.2.5
+
+include udunits-2/udunits-2.mk
+
+udunits-2:
+	make udunits-2-armv7-a/2.2.26
+
 .PHONY: sqlite3 proj iconv geos spatialite openssl tiff leptonica tesseract \
-	opencv
+	opencv udunits-2 expat
