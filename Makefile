@@ -31,7 +31,7 @@ spatialite:
 include openssl/openssl.mk
 
 openssl:
-	make openssl-armv7-a/1.0.2n
+	make openssl-armv7-a/1.0.2p
 
 include tiff/tiff.mk
 

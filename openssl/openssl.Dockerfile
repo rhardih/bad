@@ -5,7 +5,7 @@ FROM rhardih/stand:$STAND_TAG
 # List of available versions can be found at
 # https://www.openssl.org/source/
 # https://www.openssl.org/source/old/
-ARG VERSION=1.0.2n
+ARG VERSION=1.0.2p
 
 # This is a base set of environment variables as seen in
 # https://wiki.openssl.org/images/7/70/Setenv-android.sh
