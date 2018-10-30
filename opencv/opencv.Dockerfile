@@ -35,7 +35,12 @@ WORKDIR /opencv-$VERSION
 ENV PATH $PATH:/android-21-toolchain/bin
 ENV ANDROID_STANDALONE_TOOLCHAIN /android-21-toolchain
 
-RUN ./platforms/scripts/$SCRIPT_NAME.sh \
+RUN mkdir -p build_android_$SCRIPT_ARCH
+WORKDIR build_android_$SCRIPT_ARCH
+
+RUN cmake \
+  -DCMAKE_TOOLCHAIN_FILE=../platforms/android/android.toolchain.cmake \
+  -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
   -D OPENCV_EXTRA_MODULES_PATH=/opencv_contrib-$VERSION/modules \
   -D BUILD_SHARED_LIBS=ON \
   -D BUILD_ZLIB=ON \
@@ -55,8 +60,7 @@ RUN ./platforms/scripts/$SCRIPT_NAME.sh \
   -D Lept_LIBRARY=/leptonica-build/lib/liblept.so \
   -D 3P_LIBRARY_OUTPUT_PATH=/opencv-build/sdk/native/libs/$ANDROID_ABI/ \
   -D WITH_OPENCL=$WITH_OPENCL \
-  -D CMAKE_INSTALL_PREFIX:PATH=/opencv-build
-
-WORKDIR /opencv-$VERSION/platforms/build_android_$SCRIPT_ARCH
+  -D CMAKE_INSTALL_PREFIX:PATH=/opencv-build \
+  ..
 
 RUN make -j2 && make install
