@@ -3,8 +3,8 @@ ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
 FROM rhardih/stand:$STAND_TAG
 
 # List of available versions can be found at
-# ftp://download.osgeo.org/libtiff
-# ftp://download.osgeo.org/libtiff/old
+# https://download.osgeo.org/libtiff
+# https://download.osgeo.org/libtiff/old
 ARG VERSION=4.0.9
 ARG HOST=arm-linux-androideabi
 
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y install \
   automake libtool
 
 RUN wget -O tiff-$VERSION.tar.gz \
-      ftp://download.osgeo.org/libtiff/tiff-$VERSION.tar.gz && \
+      https://download.osgeo.org/libtiff/tiff-$VERSION.tar.gz && \
       tar -xzvf tiff-$VERSION.tar.gz && \
       rm tiff-$VERSION.tar.gz
 
