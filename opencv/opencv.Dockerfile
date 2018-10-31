@@ -44,6 +44,7 @@ RUN cmake \
   -D OPENCV_EXTRA_MODULES_PATH=/opencv_contrib-$VERSION/modules \
   -D BUILD_SHARED_LIBS=ON \
   -D BUILD_ZLIB=ON \
+  -D ANDROID_SDK_ROOT=$ANDROID_STANDALONE_TOOLCHAIN \
   -D ANDROID_ABI=$ANDROID_ABI \
   -D ANDROID_NATIVE_API_LEVEL=21 \
   -D ANDROID_SDK_TARGET=android-25 \
@@ -54,6 +55,7 @@ RUN cmake \
   -D BUILD_TESTS=OFF \
   -D BUILD_PERF_TESTS=OFF \
   -D BUILD_ANDROID_EXAMPLES=OFF \
+  -D BUILD_JAVA=OFF \
   -D WITH_TESSERACT=ON \
   -D Tesseract_INCLUDE_DIR=/tesseract-build/include \
   -D Tesseract_LIBRARY=/tesseract-build/libtesseract.so \
