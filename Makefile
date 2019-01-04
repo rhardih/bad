@@ -46,7 +46,7 @@ leptonica:
 include tesseract/tesseract.mk
 
 tesseract:
-	make tesseract-armv7-a/3.05.01
+	make tesseract-armv7-a/4.0.0
 
 include opencv/opencv.mk
 
