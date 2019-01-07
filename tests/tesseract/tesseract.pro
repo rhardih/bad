@@ -1,5 +1,4 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    v3-05-01 \
-    Utils
+    v3-05-01

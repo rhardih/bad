@@ -26,10 +26,10 @@ android {
   }
 }
 
-LIBS += -L$$OUT_PWD/../Utils/ -lUtils
-INCLUDEPATH += $$PWD/../Utils
-DEPENDPATH += $$PWD/../Utils
-PRE_TARGETDEPS += $$OUT_PWD/../Utils/libUtils.a
+LIBS += -L$$OUT_PWD/../../Utils/ -lUtils
+INCLUDEPATH += $$PWD/../../Utils
+DEPENDPATH += $$PWD/../../Utils
+PRE_TARGETDEPS += $$OUT_PWD/../../Utils/libUtils.a
 
 images.path = /assets
 images.files += $$PWD/../phototest.tif
