@@ -1,9 +1,14 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG PLATFORM=android-23
+ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
-FROM bad-tiff:4.0.9-$ARCH AS tiff-dep
+FROM bad-tiff:4.0.10-$ARCH AS tiff-dep
 
 FROM rhardih/stand:$STAND_TAG
+
+# Copy value of platform into final environment
+ARG PLATFORM
+ENV PLATFORM $PLATFORM
 
 ARG VERSION=1.74.4
 ARG HOST=arm-linux-androideabi
@@ -23,7 +28,7 @@ RUN wget -O $VERSION.tar.gz \
 
 WORKDIR /leptonica-$VERSION
 
-ENV PATH $PATH:/android-21-toolchain/bin
+ENV PATH $PATH:/$PLATFORM-toolchain/bin
 ENV PKG_CONFIG_PATH /tiff-build/lib/pkgconfig
 
 RUN ./autobuild
@@ -39,4 +44,4 @@ RUN ./configure \
   --without-libopenjpeg \
   --prefix=/leptonica-build/
 
-RUN make -j2 && make install
+RUN make -j8 && make install

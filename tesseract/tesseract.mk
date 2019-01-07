@@ -21,7 +21,7 @@ tesseract-x86/3.05.01: tiff-x86/4.0.9 leptonica-x86/1.74.4
 		-t bad-tesseract:3.05.01-x86 \
 		-f tesseract/tesseract-3.05.01.Dockerfile ${BUILD_ARGS} .
 
-tesseract-armv7-a/3.05.01: tiff-armv7-a/4.0.9 leptonica-armv7-a/1.74.4
+tesseract-armv7-a/3.05.01: tiff-armv7-a/4.0.10 leptonica-armv7-a/1.74.4
 	docker build -t bad-tesseract:3.05.01-armv7-a \
 		-f tesseract/tesseract-3.05.01.Dockerfile ${BUILD_ARGS} .
 

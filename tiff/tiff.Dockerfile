@@ -1,11 +1,16 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG PLATFORM=android-23
+ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
 
 FROM rhardih/stand:$STAND_TAG
+
+# Copy value of platform into final environment
+ARG PLATFORM
+ENV PLATFORM $PLATFORM
 
 # List of available versions can be found at
 # https://download.osgeo.org/libtiff
 # https://download.osgeo.org/libtiff/old
-ARG VERSION=4.0.9
+ARG VERSION=4.0.10
 ARG HOST=arm-linux-androideabi
 
 RUN apt-get update && apt-get -y install \
@@ -19,7 +24,7 @@ RUN wget -O tiff-$VERSION.tar.gz \
 
 WORKDIR /tiff-$VERSION
 
-ENV PATH $PATH:/android-21-toolchain/bin
+ENV PATH $PATH:/$PLATFORM-toolchain/bin
 
 # Acquire newer versions of .guess and .sub files for configure
 
