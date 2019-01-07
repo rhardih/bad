@@ -32,7 +32,7 @@ DEPENDPATH += $$PWD/../../Utils
 PRE_TARGETDEPS += $$OUT_PWD/../../Utils/libUtils.a
 
 images.path = /assets
-images.files += $$PWD/../phototest.tif
+images.files += $$PWD/../../data/images/phototest.tif
 images.depends += FORCE
 
 traineddata.path = /assets/tessdata # apk asset path
