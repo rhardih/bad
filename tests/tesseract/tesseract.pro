@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    tesseract
+    v3-05-01 \
+    Utils
