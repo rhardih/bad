@@ -20,6 +20,10 @@ private slots:
     void cleanupTestCase();
     void test_getUTF8Text();
 
+#ifdef BENCHMARKS
+    void benchmark_getUTF8Text();
+#endif
+
 private:
   Pix *m_image;
   tesseract::TessBaseAPI *m_tess;
@@ -79,6 +83,22 @@ void tesseract_3_05_01::test_getUTF8Text()
 
   QCOMPARE(actual, expected);
 }
+
+#ifdef BENCHMARKS
+void tesseract_3_05_01::benchmark_getUTF8Text()
+{
+  QBENCHMARK {
+    // Do ten iterations, since QBENCHMARK only performs one for slow tests by
+    // default, and there's no real way to add the necessary commandline option
+    // (-iterations) when run on-device.
+    for(int i = 0; i < 10; ++i)
+    {
+      m_tess->SetImage(m_image);
+      m_tess->GetUTF8Text();
+    }
+  }
+}
+#endif
 
 QTEST_MAIN(tesseract_3_05_01)
 

@@ -40,3 +40,5 @@ traineddata.files += $$PWD/eng.traineddata
 traineddata.depends += FORCE
 
 INSTALLS += images traineddata
+
+#DEFINES += BENCHMARKS
