@@ -36,7 +36,7 @@ openssl:
 include tiff/tiff.mk
 
 tiff:
-	make tiff-armv7-a/4.0.9
+	make tiff-armv7-a/4.0.10
 
 include leptonica/leptonica.mk
 

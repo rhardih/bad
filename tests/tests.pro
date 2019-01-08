@@ -3,4 +3,5 @@ TEMPLATE = subdirs
 SUBDIRS += \
     Utils \
     tesseract \
-    leptonica
+    leptonica \
+    tiff
