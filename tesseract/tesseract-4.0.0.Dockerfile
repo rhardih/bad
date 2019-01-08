@@ -1,4 +1,4 @@
-ARG PLATFORM=android-28
+ARG PLATFORM=android-23
 ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
@@ -35,7 +35,7 @@ ENV PATH $PATH:/android-sdk/cmake/3.6.4111459/bin
 
 RUN sdkmanager --install ndk-bundle
 
-ENV STEP 01
+ENV STEP 05
 
 RUN wget -O 4.0.0.tar.gz \
   https://github.com/rhardih/tesseract/archive/4.0.0-rhardih-$STEP.tar.gz && \
@@ -52,16 +52,15 @@ WORKDIR build
 RUN cmake \
   -G "Android Gradle - Ninja" \
   -D ANDROID_ABI=armeabi-v7a \
-  -D ANDROID_NATIVE_API_LEVEL=28 \
-  -D ANDROID_STL=c++_static \
-  -D ANDROID_TOOLCHAIN=clang \
+  -D ANDROID_NATIVE_API_LEVEL=23 \
   -D BUILD_TESTS=OFF \
   -D BUILD_TRAINING_TOOLS=OFF \
   -D CMAKE_BUILD_TYPE=Release \
   -D CMAKE_INSTALL_PREFIX:PATH=/tesseract-build \
   -D CMAKE_MAKE_PROGRAM=/android-sdk/cmake/3.6.4111459/bin/ninja \
   -D CMAKE_TOOLCHAIN_FILE=/android-sdk/ndk-bundle/build/cmake/android.toolchain.cmake \
+  -D CPPAN_BUILD=OFF \
   ..
  
-RUN ninja -j6
+RUN ninja -j8
 RUN ninja install
