@@ -1,6 +1,10 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG PLATFORM=android-23
+ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
 
 FROM rhardih/stand:$STAND_TAG
+
+ARG PLATFORM
+ENV PLATFORM $PLATFORM
 
 ARG HOST=arm-linux-androideabi
 
@@ -18,7 +22,7 @@ RUN wget -O libiconv-$VERSION.tar.gz \
 
 WORKDIR /libiconv-$VERSION
 
-ENV PATH $PATH:/android-21-toolchain/bin
+ENV PATH $PATH:/$PLATFORM-toolchain/bin
 
 RUN ./configure \
   --host=$HOST \
