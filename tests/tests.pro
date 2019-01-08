@@ -4,4 +4,5 @@ SUBDIRS += \
     Utils \
     tesseract \
     leptonica \
-    tiff
+    tiff \
+    iconv
