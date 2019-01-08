@@ -5,4 +5,5 @@ SUBDIRS += \
     tesseract \
     leptonica \
     tiff \
-    iconv
+    iconv \
+    expat
