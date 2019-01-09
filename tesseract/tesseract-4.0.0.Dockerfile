@@ -35,7 +35,7 @@ ENV PATH $PATH:/android-sdk/cmake/3.6.4111459/bin
 
 RUN sdkmanager --install ndk-bundle
 
-ENV STEP 05
+ENV STEP 06
 
 RUN wget -O 4.0.0.tar.gz \
   https://github.com/rhardih/tesseract/archive/4.0.0-rhardih-$STEP.tar.gz && \
