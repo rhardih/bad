@@ -19,6 +19,10 @@ private slots:
     void cleanupTestCase();
     void test_GetUTF8Text();
 
+#ifdef BENCHMARKS
+    void benchmark_getUTF8Text();
+#endif
+
 private:
   Pix *m_image;
   tesseract::TessBaseAPI *m_tess;
@@ -73,6 +77,19 @@ void tesseract_4_0_0::test_GetUTF8Text()
 
   QCOMPARE(actual, expected);
 }
+
+#ifdef BENCHMARKS
+void tesseract_4_0_0::benchmark_getUTF8Text()
+{
+  QBENCHMARK {
+    for(int i = 0; i < 10; ++i)
+    {
+      m_tess->SetImage(m_image);
+      m_tess->GetUTF8Text();
+    }
+  }
+}
+#endif
 
 QTEST_MAIN(tesseract_4_0_0)
 
