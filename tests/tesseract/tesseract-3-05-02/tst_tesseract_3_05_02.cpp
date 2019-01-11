@@ -7,13 +7,13 @@
 #include "tesseract/baseapi.h"
 #include "leptonica/allheaders.h"
 
-class tesseract_3_05_01 : public QObject
+class tesseract_3_05_02 : public QObject
 {
     Q_OBJECT
 
 public:
-    tesseract_3_05_01();
-    ~tesseract_3_05_01();
+    tesseract_3_05_02();
+    ~tesseract_3_05_02();
 
 private slots:
     void initTestCase();
@@ -30,15 +30,15 @@ private:
   char *m_text;
 };
 
-tesseract_3_05_01::tesseract_3_05_01()
+tesseract_3_05_02::tesseract_3_05_02()
 {
 }
 
-tesseract_3_05_01::~tesseract_3_05_01()
+tesseract_3_05_02::~tesseract_3_05_02()
 {
 }
 
-void tesseract_3_05_01::initTestCase()
+void tesseract_3_05_02::initTestCase()
 {
   QString image_path = Utils::migrateAsset("assets:/phototest.tif");
   QVERIFY2(image_path != "", "phototest.tif not migrated");
@@ -58,14 +58,14 @@ void tesseract_3_05_01::initTestCase()
            "Failed to initialize Tesseract.");
 }
 
-void tesseract_3_05_01::cleanupTestCase()
+void tesseract_3_05_02::cleanupTestCase()
 {
   delete [] m_text;
   m_tess->End();
   pixDestroy(&m_image);
 }
 
-void tesseract_3_05_01::test_getUTF8Text()
+void tesseract_3_05_02::test_getUTF8Text()
 {
   // Note the misdetection in the first line here vs. 3.02; 'ocr' vs. 'cor'.
   // 3.02: ... to test the\nocr code ...
@@ -85,7 +85,7 @@ void tesseract_3_05_01::test_getUTF8Text()
 }
 
 #ifdef BENCHMARKS
-void tesseract_3_05_01::benchmark_getUTF8Text()
+void tesseract_3_05_02::benchmark_getUTF8Text()
 {
   QBENCHMARK {
     // Do ten iterations, since QBENCHMARK only performs one for slow tests by
@@ -100,6 +100,6 @@ void tesseract_3_05_01::benchmark_getUTF8Text()
 }
 #endif
 
-QTEST_MAIN(tesseract_3_05_01)
+QTEST_MAIN(tesseract_3_05_02)
 
-#include "tst_tesseract_3_05_01.moc"
+#include "tst_tesseract_3_05_02.moc"

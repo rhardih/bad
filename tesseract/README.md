@@ -11,4 +11,4 @@ The complete list is available at:
 The English variant specifically:
 
 - **3.02.02**: [tesseract-ocr-3.02.eng.tar.gz](https://sourceforge.net/projects/tesseract-ocr-alt/files/tesseract-ocr-3.02.eng.tar.gz/download)
-- **3.05.01**: [eng.traineddata](https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.traineddata)
+- **3.05.02**: [eng.traineddata](https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.traineddata)

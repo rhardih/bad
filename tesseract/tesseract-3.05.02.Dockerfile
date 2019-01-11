@@ -21,18 +21,16 @@ RUN apt-get update && apt-get -y install \
   autoconf-archive \
   pkg-config
 
-RUN wget -O 3.05.01.tar.gz \
-  https://github.com/tesseract-ocr/tesseract/archive/3.05.01.tar.gz && \
-  tar -xzvf 3.05.01.tar.gz && \
-  rm 3.05.01.tar.gz
+RUN wget -O 3.05.02.tar.gz \
+  https://github.com/tesseract-ocr/tesseract/archive/3.05.02.tar.gz && \
+  tar -xzvf 3.05.02.tar.gz && \
+  rm 3.05.02.tar.gz
 
-WORKDIR /tesseract-3.05.01
+WORKDIR /tesseract-3.05.02
 
-COPY tesseract/patches/3.05.01/configure.ac.patch configure.ac.patch
-COPY tesseract/patches/3.05.01/Makefile.am.patch api/Makefile.am.patch
+COPY tesseract/patches/3.05.02/configure.ac.patch configure.ac.patch
 
 RUN patch < configure.ac.patch
-RUN cd api && patch < Makefile.am.patch
 
 ENV PATH $PATH:/$PLATFORM-toolchain/bin
 ENV PKG_CONFIG_PATH /leptonica-build/lib/pkgconfig/
