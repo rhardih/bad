@@ -1,5 +1,5 @@
-ARG PLATFORM=android-21
-ARG STAND_TAG=r10e--$PLATFORM--arm-linux-androideabi-4.9
+ARG PLATFORM=android-23
+ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
 FROM bad-tiff:4.0.10-$ARCH AS tiff-dep
@@ -37,9 +37,17 @@ ENV PKG_CONFIG_PATH /leptonica-build/lib/pkgconfig/
 
 RUN ./autogen.sh
 
+# --disable-largefile is added to avoid:
+#
+#  error: use of undeclared identifier 'fseeko'
+#
+# See the following issue for further info:
+# https://github.com/android-ndk/ndk/issues/442
 RUN ./configure \
+   ac_cv_c_bigendian=no \
   --host=$HOST \
   --with-extra-libraries=/leptonica-build/lib \
+	--disable-largefile \
   --prefix=/tesseract-build/
 
 RUN make -j8 && make install
