@@ -87,16 +87,25 @@ void tesseract_3_05_02::test_getUTF8Text()
 #ifdef BENCHMARKS
 void tesseract_3_05_02::benchmark_getUTF8Text()
 {
-  QBENCHMARK {
-    // Do ten iterations, since QBENCHMARK only performs one for slow tests by
-    // default, and there's no real way to add the necessary commandline option
-    // (-iterations) when run on-device.
-    for(int i = 0; i < 10; ++i)
-    {
-      m_tess->SetImage(m_image);
-      m_tess->GetUTF8Text();
-    }
+  qint64 iterations = 10;
+  qint64 t0 = 0;
+  qint64 t1 = 0;
+
+  QElapsedTimer timer;
+  timer.start();
+
+  for(qint64 i = 0; i < iterations; ++i)
+  {
+    m_tess->SetImage(m_image);
+    t0 += timer.restart();
+
+    m_tess->GetUTF8Text();
+    t1 += timer.restart();
   }
+
+  qDebug() << "\tAverage duration:\n";
+  qDebug() << "\t  SetImage:" << t0 / iterations << "ms";
+  qDebug() << "\t  GetUTF8Text:" << t1 / iterations << "ms";
 }
 #endif
 
