@@ -6,4 +6,5 @@ SUBDIRS += \
     leptonica \
     tiff \
     iconv \
-    expat
+    expat \
+    openssl
