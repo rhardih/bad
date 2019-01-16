@@ -7,4 +7,5 @@ SUBDIRS += \
     tiff \
     iconv \
     expat \
-    openssl
+    openssl \
+    proj
