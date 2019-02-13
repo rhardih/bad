@@ -1,4 +1,5 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG PLATFORM=android-23
+ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
 FROM bad-proj:4.9.3-$ARCH AS proj-dep
@@ -6,6 +7,8 @@ FROM bad-proj:4.9.3-$ARCH AS proj-dep
 FROM rhardih/stand:$STAND_TAG
 
 ARG HOST=arm-linux-androideabi
+ARG PLATFORM
+ENV PLATFORM $PLATFORM
 
 # List of available versions can be found at
 # http://download.osgeo.org/gdal/
@@ -24,11 +27,11 @@ RUN wget -O gdal-$VERSION.tar.gz http://download.osgeo.org/gdal/$VERSION/gdal-$V
 
 WORKDIR /gdal-$VERSION
 
-ENV PATH $PATH:/android-21-toolchain/bin
+ENV PATH $PATH:/$PLATFORM-toolchain/bin
 
 RUN ./configure \
   --with-proj=/proj-build \
   --host=$HOST \
   --prefix=/gdal-build/
 
-RUN make && make install
+RUN make -j6 && make install

@@ -1,8 +1,11 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG PLATFORM=android-23
+ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
 
 FROM rhardih/stand:$STAND_TAG
 
 ARG HOST=arm-linux-androideabi
+ARG PLATFORM
+ENV PLATFORM $PLATFORM
 
 # List of available versions can be found at
 # https://github.com/OSGeo/proj.4/releases
@@ -17,10 +20,10 @@ RUN wget -O proj-$VERSION.tar.gz http://download.osgeo.org/proj/proj-$VERSION.ta
 
 WORKDIR /proj-$VERSION
 
-ENV PATH $PATH:/android-21-toolchain/bin
+ENV PATH $PATH:/$PLATFORM-toolchain/bin
 
 RUN ./configure \
   --host=$HOST \
   --prefix=/proj-build/
 
-RUN make && make install
+RUN make -j6 && make install
