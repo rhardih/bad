@@ -11,19 +11,15 @@ Cross compiling native libraries can sometimes be a
 [**pita**](https://www.urbandictionary.com/define.php?term=pita). More often than
 not, you'll need architecture specific versions of dependent libraries in order
 to succeed and you'll quickly find yourself cross compiling those dependencies,
-as well as the their dependencies, and so on and so forth. Down the
-rabbit hole we go.
+as well as the their dependencies, and so on and so forth.
 
-Sometimes it would be nice to just have a sure-fire way of getting a hold of
-that elusive library, without having to get into different toolchains, build
-systems etc. etc.
+It's turtles all the way down.
 
-That is what this project aims to accomplish. By using [**docker**](https://www.docker.com), it's possible to
-lock down a specific enviroment with just the right dependencies met, in order
-to successfully build a specific native library for the architecture of your
-choice.
+Wouldn't it be nice to just be able to `make` that library you need, without having to get into different toolchains, build systems etc. etc.
 
-The assumption is, if it builds *once*, it will *always* build.
+That is what this project aims to accomplish. By using [**docker**](https://www.docker.com), it's possible to lock down a specific enviroment with just the right dependencies met, in order to successfully build a specific native library for the architecture of your choice.
+
+That's the beauty of an immutable build system. If it builds *once*, it will *always* build!
 
 ## Naming convention
 
