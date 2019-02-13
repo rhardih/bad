@@ -8,4 +8,5 @@ SUBDIRS += \
     iconv \
     expat \
     openssl \
-    proj
+    proj \
+    gdal
