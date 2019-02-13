@@ -11,6 +11,16 @@ private slots:
 
 };
 
+/**
+ * @brief proj_4_9_3::test_transform
+ *
+ * This test performs basic coordiante transformation using the Mercator
+ * projection.
+ *
+ * Code is based on the example given in:
+ *
+ *   https://proj4.org/development/migration.html
+ */
 void proj_4_9_3::test_transform()
 {
   projPJ pj_merc, pj_latlong;
