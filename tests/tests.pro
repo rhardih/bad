@@ -9,4 +9,5 @@ SUBDIRS += \
     expat \
     openssl \
     proj \
-    gdal
+    gdal \
+    geos
