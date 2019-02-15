@@ -10,4 +10,5 @@ SUBDIRS += \
     openssl \
     proj \
     gdal \
-    geos
+    geos \
+    udunits-2
