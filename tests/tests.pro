@@ -11,4 +11,5 @@ SUBDIRS += \
     proj \
     gdal \
     geos \
-    udunits-2
+    udunits-2 \
+    sqlite
