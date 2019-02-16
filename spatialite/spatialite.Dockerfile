@@ -1,4 +1,5 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG PLATFORM=android-23
+ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
 FROM bad-sqlite3:3.21.0-$ARCH AS sqlite3-dep
@@ -9,6 +10,8 @@ FROM bad-geos:3.6.2-$ARCH AS geos-dep
 FROM rhardih/stand:$STAND_TAG
 
 ARG HOST=arm-linux-androideabi
+ARG PLATFORM
+ENV PLATFORM $PLATFORM
 
 # List of available versions can be found at
 # http://www.gaia-gis.it/gaia-sins/libspatialite-sources/
@@ -34,10 +37,8 @@ RUN wget -O libspatialite-$VERSION.tar.gz \
 
 WORKDIR /libspatialite-$VERSION
 
-ENV PATH $PATH:/android-21-toolchain/bin
+ENV PATH $PATH:/$PLATFORM-toolchain/bin
 ENV PATH $PATH:/geos-build/bin
-
-ENV PKG_CONFIG_PATH /sqlite3-build/lib/pkgconfig:/proj-build/lib/pkgconfig
 
 # Update "missing" script to avoid error:
 # libspatialite-$VERSION/missing: Unknown `--is-lightweight' option
@@ -50,14 +51,33 @@ RUN wget -O config.guess \
 RUN wget -O config.sub \
   https://raw.githubusercontent.com/gcc-mirror/gcc/master/config.sub
 
-RUN CFLAGS=$(pkg-config sqlite3 proj --libs --cflags) \
-  CFLAGS="$CFLAGS -I/iconv-build/include -L/iconv-build/lib -liconv" \
-  CFLAGS="$CFLAGS -I/geos-build/include -L/geos-build/lib -lgeos" \
-  CFLAGS="$CFLAGS -L/android-21-toolchain/sysroot/usr/lib -llog" \
+# pkg-config is only used for libxml2 it would seem, so is instead used directly
+# to set vars for configure
+ENV PKG_CONFIG_PATH "/sqlite3-build/lib/pkgconfig"
+ENV PKG_CONFIG_PATH "$PKG_CONFIG_PATH:/proj-build/lib/pkgconfig"
+
+RUN pkg-config sqlite3 proj --cflags >> cflags.tmp
+RUN pkg-config sqlite3 proj --libs >> ldflags.tmp
+
+# iconv and geos doesn't produce pkg-config .pc files, so those flags are added
+# manually
+RUN echo "-I/iconv-build/include" >> cflags.tmp
+RUN echo "-L/iconv-build/lib -liconv" >> ldflags.tmp
+
+RUN echo "-I/geos-build/include" >> cflags.tmp
+RUN echo "-L/geos-build/lib -lgeos" >> cflags.tmp
+
+# Linking log remediates the following run time error:
+#   UnsatisfiedLinkError: dlopen failed: cannot locate symbol "__android_log_print"
+RUN echo "-L/$PLATFORM-toolchain/sysroot/usr/lib -llog" >> ldflags.tmp
+
+RUN CFLAGS=$(tr "\r\n" " " < cflags.tmp) \
+  LDFLAGS=$(tr "\r\n" " " < ldflags.tmp) \
   ./configure --host=$HOST \
   --target=android \
   --disable-freexl \
   --disable-libxml2 \
+  --disable-examples \
   --prefix=/spatialite-build/
 
-RUN make && make install
+RUN make -j4 && make install
