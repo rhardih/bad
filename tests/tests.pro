@@ -12,4 +12,5 @@ SUBDIRS += \
     gdal \
     geos \
     udunits-2 \
-    sqlite
+    sqlite \
+    spatialite
