@@ -6,7 +6,7 @@ ARG HOST=arm-linux-androideabi
 
 # List of available versions can be found at
 # https://www.sqlite.org/src/taglist
-ARG VERSION=3.21.0
+ARG VERSION
 
 RUN apt-get update && apt-get -y install \
   wget \

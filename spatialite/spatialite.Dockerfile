@@ -15,7 +15,7 @@ ENV PLATFORM $PLATFORM
 
 # List of available versions can be found at
 # http://www.gaia-gis.it/gaia-sins/libspatialite-sources/
-ARG VERSION=4.3.0a
+ARG VERSION
 
 COPY --from=sqlite3-dep /sqlite3-build /sqlite3-build
 COPY --from=proj-dep /proj-build /proj-build

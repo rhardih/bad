@@ -12,7 +12,7 @@ ENV PLATFORM $PLATFORM
 
 # List of available versions can be found at
 # http://download.osgeo.org/gdal/
-ARG VERSION=2.3.1
+ARG VERSION
 
 COPY --from=proj-dep /proj-build /proj-build
 

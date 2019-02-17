@@ -5,7 +5,7 @@ FROM bad-expat:2.2.5-$ARCH as expat-dep
 
 FROM rhardih/stand:$STAND_TAG
 
-ARG VERSION=2.2.26
+ARG VERSION
 ARG HOST=arm-linux-androideabi
 
 COPY --from=expat-dep /expat-build /expat-build

@@ -10,7 +10,7 @@ ENV PLATFORM $PLATFORM
 # List of available versions can be found at
 # https://download.osgeo.org/libtiff
 # https://download.osgeo.org/libtiff/old
-ARG VERSION=4.0.10
+ARG VERSION
 ARG HOST=arm-linux-androideabi
 
 RUN apt-get update && apt-get -y install \

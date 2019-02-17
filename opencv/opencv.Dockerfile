@@ -3,7 +3,7 @@ ARG ARCH=armv7-a
 
 FROM rhardih/stand:$STAND_TAG
 
-ARG VERSION=3.3.1
+ARG VERSION
 ARG HOST=arm-linux-androideabi
 ARG ANDROID_ABI=armeabi-v7a
 ARG SCRIPT_NAME=cmake_android_arm

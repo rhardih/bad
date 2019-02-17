@@ -1,12 +1,16 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG PLATFORM=android-23
+ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
 
 FROM rhardih/stand:$STAND_TAG
+
+ARG PLATFORM
+ENV PLATFORM $PLATFORM
 
 ARG HOST=arm-linux-androideabi
 
 # List of available versions can be found at
 # http://download.osgeo.org/geos/
-ARG VERSION=3.6.2
+ARG VERSION
 
 RUN apt-get update && apt-get -y install \
   wget \

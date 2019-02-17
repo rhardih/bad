@@ -9,7 +9,7 @@ ENV PLATFORM $PLATFORM
 
 # List of available versions can be found at
 # https://github.com/OSGeo/proj.4/releases
-ARG VERSION=4.9.3
+ARG VERSION
 
 RUN apt-get update && apt-get -y install \
   wget

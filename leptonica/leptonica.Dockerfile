@@ -10,7 +10,7 @@ FROM rhardih/stand:$STAND_TAG
 ARG PLATFORM
 ENV PLATFORM $PLATFORM
 
-ARG VERSION=1.74.4
+ARG VERSION
 ARG HOST=arm-linux-androideabi
 
 COPY --from=tiff-dep /tiff-build /tiff-build

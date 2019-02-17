@@ -2,7 +2,7 @@ ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
 
 FROM rhardih/stand:$STAND_TAG
 
-ARG VERSION=2.2.5
+ARG VERSION
 ARG HOST=arm-linux-androideabi
 
 RUN apt-get update && apt-get -y install \

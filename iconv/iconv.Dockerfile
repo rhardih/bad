@@ -10,7 +10,7 @@ ARG HOST=arm-linux-androideabi
 
 # List of available versions can be found at
 # https://ftp.gnu.org/pub/gnu/libiconv/
-ARG VERSION=1.15
+ARG VERSION
 
 RUN apt-get update && apt-get -y install \
   wget
