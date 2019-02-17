@@ -51,7 +51,7 @@ tesseract:
 include opencv/opencv.mk
 
 opencv:
-	make opencv-armv7-a/3.4.0
+	make opencv-armv7-a/3.4.5
 
 include expat/expat.mk
 
