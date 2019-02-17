@@ -1,9 +1,6 @@
 ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
-FROM bad-leptonica:1.74.4-$ARCH AS leptonica-dep
-FROM bad-tesseract:3.02.02-$ARCH AS tesseract-dep
-
 FROM rhardih/stand:$STAND_TAG
 
 ARG VERSION=3.3.1
@@ -12,9 +9,6 @@ ARG ANDROID_ABI=armeabi-v7a
 ARG SCRIPT_NAME=cmake_android_arm
 ARG SCRIPT_ARCH=arm
 ARG WITH_OPENCL=ON
-
-COPY --from=leptonica-dep /leptonica-build /leptonica-build
-COPY --from=tesseract-dep /tesseract-build /tesseract-build
 
 RUN apt-get update && apt-get -y install \
   wget \
@@ -49,20 +43,16 @@ RUN cmake \
   -D ANDROID_NATIVE_API_LEVEL=21 \
   -D ANDROID_SDK_TARGET=android-25 \
   -D WITH_CAROTENE=ON \
-  -D WITH_QT=ON \
+  -D WITH_QT=OFF \
   -D WITH_OPENGL=ON \
   -D CMAKE_BUILD_TYPE=Release \
   -D BUILD_TESTS=OFF \
   -D BUILD_PERF_TESTS=OFF \
   -D BUILD_ANDROID_EXAMPLES=OFF \
   -D BUILD_JAVA=OFF \
-  -D WITH_TESSERACT=ON \
-  -D Tesseract_INCLUDE_DIR=/tesseract-build/include \
-  -D Tesseract_LIBRARY=/tesseract-build/libtesseract.so \
-  -D Lept_LIBRARY=/leptonica-build/lib/liblept.so \
   -D 3P_LIBRARY_OUTPUT_PATH=/opencv-build/sdk/native/libs/$ANDROID_ABI/ \
   -D WITH_OPENCL=$WITH_OPENCL \
   -D CMAKE_INSTALL_PREFIX:PATH=/opencv-build \
   ..
 
-RUN make -j2 && make install
+RUN make -j4 && make install
