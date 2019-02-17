@@ -13,4 +13,5 @@ SUBDIRS += \
     geos \
     udunits-2 \
     sqlite \
-    spatialite
+    spatialite \
+    opencv
