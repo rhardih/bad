@@ -1,9 +1,13 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG PLATFORM=android-23
+ARG TOOLCHAIN=arm-linux-androideabi-4.9
 
-FROM rhardih/stand:$STAND_TAG
+FROM rhardih/stand:r18b--$PLATFORM--$TOOLCHAIN
 
 ARG VERSION
 ARG HOST=arm-linux-androideabi
+ARG PLATFORM
+
+ENV PLATFORM $PLATFORM
 
 RUN apt-get update && apt-get -y install \
   wget \
@@ -17,7 +21,7 @@ RUN wget -O $VERSION.tar.bz2 \
 
 WORKDIR /expat-$VERSION
 
-ENV PATH $PATH:/android-21-toolchain/bin
+ENV PATH $PATH:/$PLATFORM-toolchain/bin
 
 RUN autoreconf -vfi
 
@@ -25,4 +29,4 @@ RUN ./configure \
 	--host=$HOST \
   --prefix=/expat-build/
 
-RUN make -j2 && make install
+RUN make -j4 && make install
