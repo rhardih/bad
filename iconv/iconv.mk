@@ -1,7 +1,7 @@
 iconv-x86/%:
 	docker build --build-arg VERSION=${@F} \
-		--build-arg STAND_TAG=r10e--android-21--x86-4.9 \
 		--build-arg HOST=i686-linux-android \
+		--build-arg TOOLCHAIN=x86-4.9 \
 		-t bad-iconv:${@F}-x86 -f iconv/iconv.Dockerfile ${BUILD_ARGS} .
 
 iconv-armv7-a/%:

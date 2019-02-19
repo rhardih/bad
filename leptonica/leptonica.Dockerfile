@@ -1,10 +1,10 @@
 ARG PLATFORM=android-23
-ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
+ARG TOOLCHAIN=arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
 FROM bad-tiff:4.0.10-$ARCH AS tiff-dep
 
-FROM rhardih/stand:$STAND_TAG
+FROM rhardih/stand:r18b--$PLATFORM--$TOOLCHAIN
 
 # Copy value of platform into final environment
 ARG PLATFORM
@@ -44,4 +44,4 @@ RUN ./configure \
   --without-libopenjpeg \
   --prefix=/leptonica-build/
 
-RUN make -j8 && make install
+RUN make -j4 && make install

@@ -1,7 +1,7 @@
 proj-x86/%:
 	docker build --build-arg VERSION=${@F} \
-		--build-arg STAND_TAG=r10e--android-21--x86-4.9 \
 		--build-arg HOST=i686-linux-android \
+		--build-arg TOOLCHAIN=x86-4.9 \
 		-t bad-proj:${@F}-x86 -f proj/proj.Dockerfile ${BUILD_ARGS} .
 
 proj-armv7-a/%:

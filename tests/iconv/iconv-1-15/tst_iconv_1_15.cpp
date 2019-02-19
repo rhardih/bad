@@ -22,14 +22,11 @@ void iconv_1_15::test_iconv()
     QFAIL("Failed iconv_open");
 
   QString s = "æøå";
-  char *expected = s.toUtf8().data();
-  char *inbuf = s.toLatin1().data();
-
   // utf-8 'æøå'
-  QCOMPARE(expected, "\u00E6\u00F8\u00E5");
-
+  const char *expected = "\xC3\xA6\xC3\xB8\xC3\xA5";
   // iso-8859-1 'æøå'
-  QCOMPARE(inbuf, "\xE6\xF8\xE5");
+  char *inbuf = static_cast<char *>(calloc(4, sizeof(char)));
+  memcpy(inbuf, "\xE6\xF8\xE5", 3);
 
   size_t inbytesleft = 4;
   size_t outbytesleft = 7;
@@ -38,7 +35,8 @@ void iconv_1_15::test_iconv()
 
   size_t ret = iconv(cd, &inbuf, &inbytesleft, &outbuf, &outbytesleft);
 
-  if(ret == static_cast<size_t>(-1)) {
+  if(ret == static_cast<size_t>(-1))
+  {
     perror("iconv");
   }
   else

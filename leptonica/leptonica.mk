@@ -1,7 +1,7 @@
 leptonica-x86/%: tiff-x86/4.0.9
 	docker build --build-arg VERSION=${@F} \
-		--build-arg STAND_TAG=r10e--android-21--x86-4.9 \
 		--build-arg HOST=i686-linux-android \
+		--build-arg TOOLCHAIN=x86-4.9 \
 		--build-arg ARCH=x86 \
 		-t bad-leptonica:${@F}-x86 \
 		-f leptonica/leptonica.Dockerfile ${BUILD_ARGS} .

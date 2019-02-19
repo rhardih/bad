@@ -10,15 +10,22 @@ SOURCES +=  tst_leptonica_1_74_4.cpp
 
 android {
   equals(ANDROID_TARGET_ARCH, armeabi-v7a) {
-    # leptonica
-    LIBS += -L$$(BAD_PATH)/extracted/leptonica-1.74.4-armv7-a-build/lib/ -llept
-    INCLUDEPATH += $$(BAD_PATH)/extracted/leptonica-1.74.4-armv7-a-build/include
-
-    ANDROID_EXTRA_LIBS += \
-      $$(BAD_PATH)/extracted/leptonica-1.74.4-armv7-a-build/lib/liblept.so \
-      \ # libtiff needs an include as well, because of leptonica uses it to read a .tif file
-      $$(BAD_PATH)/extracted/tiff-4.0.10-armv7-a-build/lib/libtiff.so
+    BUILD_PATH = $$(BAD_PATH)/extracted/leptonica-1.74.4-armv7-a-build
+    TIFF_BUILD_PATH=$$(BAD_PATH)/extracted/tiff-4.0.10-armv7-a-build/lib
   }
+
+  equals(ANDROID_TARGET_ARCH, x86) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/leptonica-1.74.4-x86-build
+    TIFF_BUILD_PATH=$$(BAD_PATH)/extracted/tiff-4.0.10-x86-build/lib
+  }
+
+  LIBS += -L$$BUILD_PATH/lib/ -llept
+  INCLUDEPATH += $$BUILD_PATH/include
+
+  ANDROID_EXTRA_LIBS += \
+    $$BUILD_PATH/lib/liblept.so \
+    \ # libtiff needs to be included as well, because leptonica uses it to read a .tif file
+    $$TIFF_BUILD_PATH/libtiff.so
 }
 
 images.path = /assets

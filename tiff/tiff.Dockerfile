@@ -1,17 +1,16 @@
 ARG PLATFORM=android-23
-ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
+ARG TOOLCHAIN=arm-linux-androideabi-4.9
 
-FROM rhardih/stand:$STAND_TAG
+FROM rhardih/stand:r18b--$PLATFORM--$TOOLCHAIN
 
-# Copy value of platform into final environment
 ARG PLATFORM
 ENV PLATFORM $PLATFORM
+ARG HOST=arm-linux-androideabi
 
 # List of available versions can be found at
 # https://download.osgeo.org/libtiff
 # https://download.osgeo.org/libtiff/old
 ARG VERSION
-ARG HOST=arm-linux-androideabi
 
 RUN apt-get update && apt-get -y install \
   wget \
@@ -40,4 +39,4 @@ RUN ./configure \
       --host=$HOST \
       --prefix=/tiff-build/
 
-RUN make -j2 && make install
+RUN make -j4 && make install
