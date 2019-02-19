@@ -15,3 +15,4 @@ SUBDIRS += \
     sqlite \
     spatialite \
     opencv
+    curl

@@ -63,5 +63,10 @@ include udunits-2/udunits-2.mk
 udunits-2:
 	make udunits-2-armv7-a/2.2.26
 
+include curl/curl.mk
+
+curl:
+	make curl-armv7-a/7.64.0
+
 .PHONY: sqlite3 proj gdal iconv geos spatialite openssl tiff leptonica \
-	tesseract opencv udunits-2 expat
+	tesseract opencv udunits-2 expat curl
