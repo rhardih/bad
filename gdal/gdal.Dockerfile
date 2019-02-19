@@ -4,6 +4,7 @@ ARG ARCH=armv7-a
 
 FROM bad-proj:4.9.3-$ARCH AS proj-dep
 FROM bad-curl:7.64.0-$ARCH AS curl-dep
+FROM bad-geos:3.6.2-$ARCH AS geos-dep
 
 FROM rhardih/stand:r18b--$PLATFORM--$TOOLCHAIN
 
@@ -17,6 +18,7 @@ ARG VERSION
 
 COPY --from=proj-dep /proj-build /proj-build
 COPY --from=curl-dep /curl-build /curl-build
+COPY --from=geos-dep /geos-build /geos-build
 
 RUN apt-get update && apt-get -y install \
   bash-completion \
@@ -35,6 +37,7 @@ ENV PATH $PATH:/$PLATFORM-toolchain/bin
 RUN ./configure \
   --with-proj=/proj-build \
   --with-curl=/curl-build/bin/curl-config \
+  --with-geos=/geos-build/bin/geos-config \
   --host=$HOST \
   --prefix=/gdal-build/
 
