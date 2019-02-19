@@ -1,5 +1,5 @@
 ARG PLATFORM=android-23
-ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
+ARG TOOLCHAIN=arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
 FROM bad-sqlite3:3.21.0-$ARCH AS sqlite3-dep
@@ -7,7 +7,7 @@ FROM bad-proj:4.9.3-$ARCH AS proj-dep
 FROM bad-iconv:1.15-$ARCH AS iconv-dep
 FROM bad-geos:3.6.2-$ARCH AS geos-dep
 
-FROM rhardih/stand:$STAND_TAG
+FROM rhardih/stand:r18b--$PLATFORM--$TOOLCHAIN
 
 ARG HOST=arm-linux-androideabi
 ARG PLATFORM

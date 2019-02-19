@@ -1,12 +1,17 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG PLATFORM=android-21
+ARG TOOLCHAIN=arm-linux-androideabi-4.9
 
-FROM rhardih/stand:$STAND_TAG
+FROM rhardih/stand:r10e--$PLATFORM--$TOOLCHAIN
 
+ARG PLATFORM
+ENV PLATFORM $PLATFORM
 ARG HOST=arm-linux-androideabi
 
 # List of available versions can be found at
 # https://www.sqlite.org/src/taglist
 ARG VERSION
+
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get -y install \
   wget \
@@ -21,7 +26,7 @@ RUN wget -O sqlite-$VERSION.tar.gz \
 
 WORKDIR /sqlite
 
-ENV PATH $PATH:/android-21-toolchain/bin
+ENV PATH $PATH:/$PLATFORM-toolchain/bin
 
 # Acquire newer versions of .guess and .sub files for configure
 
@@ -41,4 +46,4 @@ RUN ./configure \
   --disable-tcl \
   --prefix=/sqlite3-build/
 
-RUN make -j2  && make install
+RUN make -j4  && make install

@@ -1,9 +1,11 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
-ARG ARCH=armv7-a
+ARG PLATFORM=android-21
+ARG TOOLCHAIN=arm-linux-androideabi-4.9
 
-FROM rhardih/stand:$STAND_TAG
+FROM rhardih/stand:r10e--$PLATFORM--$TOOLCHAIN
 
 ARG VERSION
+ARG PLATFORM
+ENV PLATFORM $PLATFORM
 ARG HOST=arm-linux-androideabi
 ARG ANDROID_ABI=armeabi-v7a
 ARG SCRIPT_NAME=cmake_android_arm
@@ -26,8 +28,8 @@ RUN wget -O $VERSION.tar.gz \
 
 WORKDIR /opencv-$VERSION
 
-ENV PATH $PATH:/android-21-toolchain/bin
-ENV ANDROID_STANDALONE_TOOLCHAIN /android-21-toolchain
+ENV PATH $PATH:/$PLATFORM-toolchain/bin
+ENV ANDROID_STANDALONE_TOOLCHAIN /$PLATFORM-toolchain
 
 RUN mkdir -p build_android_$SCRIPT_ARCH
 WORKDIR build_android_$SCRIPT_ARCH

@@ -39,7 +39,6 @@ void udunits_2_2_2_26::cleanupTestCase() {
 
 void udunits_2_2_2_26::test_conversion()
 {
-  qDebug() << m_system;
   ut_unit *sourceUnit = ut_parse(m_system, "kg", UT_ASCII);
   QVERIFY2(ut_get_status() == UT_SUCCESS, "Failed parsing unit 'kg'");
 

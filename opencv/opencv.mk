@@ -1,6 +1,6 @@
 opencv-x86/%:
 	docker build --build-arg VERSION=${@F} \
-		--build-arg STAND_TAG=r10e--android-21--x86-4.9 \
+		--build-arg TOOLCHAIN=x86-4.9 \
 		--build-arg HOST=i686-linux-android \
 		--build-arg ARCH=x86 \
 		--build-arg ANDROID_ABI=x86 \

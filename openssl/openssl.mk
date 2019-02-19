@@ -1,6 +1,6 @@
 openssl-x86/%:
 	docker build --build-arg VERSION=${@F} \
-		--build-arg STAND_TAG=r10e--android-21--x86-4.9 \
+		--build-arg TOOLCHAIN=x86-4.9 \
 		--build-arg ANDROID_EABI=x86-4.9 \
 		--build-arg ANDROID_API=android-21 \
 		--build-arg MACHINE=i686 \

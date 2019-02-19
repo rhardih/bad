@@ -1,6 +1,11 @@
-ARG STAND_TAG=r10e--android-21--arm-linux-androideabi-4.9
+ARG PLATFORM=android-21
+ARG TOOLCHAIN=arm-linux-androideabi-4.9
 
-FROM rhardih/stand:$STAND_TAG
+FROM rhardih/stand:r10e--$PLATFORM--$TOOLCHAIN
+
+ARG PLATFORM
+ENV PLATFORM $PLATFORM
+#ARG HOST=arm-linux-androideabi
 
 # List of available versions can be found at
 # https://www.openssl.org/source/
@@ -10,7 +15,6 @@ ARG VERSION
 # This is a base set of environment variables as seen in
 # https://wiki.openssl.org/images/7/70/Setenv-android.sh
 ARG ANDROID_EABI=arm-linux-androideabi-4.9
-ARG ANDROID_API=android-21
 ARG MACHINE=armv7
 ARG SYSTEM=android
 ARG ARCH=arm
@@ -31,16 +35,16 @@ RUN wget -O openssl-$VERSION.tar.gz \
 
 WORKDIR /openssl-$VERSION
 
-ENV PATH=$PATH:/$ANDROID_API-toolchain/bin \
+ENV PATH=$PATH:/$PLATFORM-toolchain/bin \
   ANDROID_ARCH=android-$ARCH \
   ANDROID_EABI=$ANDROID_EABI \
-  ANDROID_API=$ANDROID_API \
-  ANDROID_TOOLCHAIN=/$ANDROID_API-toolchain/bin \
+  ANDROID_API=$PLATFORM \
+  ANDROID_TOOLCHAIN=/$PLATFORM-toolchain/bin \
   MACHINE=$MACHINE \
   SYSTEM=$SYSTEM \
   ARCH=$ARCH \
   CROSS_COMPILE=$CROSS_COMPILE \
-  ANDROID_DEV=/$ANDROID_API-toolchain/usr
+  ANDROID_DEV=/$PLATFORM-toolchain/usr
 
 RUN ./Configure \
   --prefix=/openssl-build/ \
@@ -49,6 +53,6 @@ RUN ./Configure \
 
 # CALC_VERSIONS is set in order to build versionless copies since Android
 # doesn't support versioned shared libs.
-RUN make -j depend && \
-  make -j CALC_VERSIONS="SHLIB_COMPAT=; SHLIB_SOVER=" build_libs && \
+RUN make -j4 depend && \
+  make -j4 CALC_VERSIONS="SHLIB_COMPAT=; SHLIB_SOVER=" build_libs && \
   make install
