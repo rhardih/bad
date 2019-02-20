@@ -33,7 +33,20 @@ So as an example, the container to build an *armv7-a* version of **libsqlite3** 
 
 ## Building
 
-Make is used to define the various build targets and dependencies.
+All libraries are compiled from source. Each build downloads the corresponding
+source at run time, which means the success of a build is tied to the
+availability of the sources online.
+
+In case a repository goes down, or is unreachable at the time of a build,
+there's just no way to make it succeed. This trade-off is a concious decision,
+in order to waiver any concerns about source tampering, which would naturally
+follow if sources were bundled.
+
+---
+
+[Make](https://www.gnu.org/software/make) is used, to define the various build
+targets and dependencies.
+
 
 ### Example
 
