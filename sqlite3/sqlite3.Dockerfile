@@ -1,7 +1,7 @@
-ARG PLATFORM=android-21
+ARG PLATFORM=android-23
 ARG TOOLCHAIN=arm-linux-androideabi-4.9
 
-FROM rhardih/stand:r10e--$PLATFORM--$TOOLCHAIN
+FROM rhardih/stand:r17c--$PLATFORM--$TOOLCHAIN
 
 ARG PLATFORM
 ENV PLATFORM $PLATFORM
