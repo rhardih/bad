@@ -40,3 +40,6 @@ RUN ./configure \
       --prefix=/tiff-build/
 
 RUN make -j4 && make install
+
+# Fix b0rked .pc naming
+RUN mv /tiff-build/lib/pkgconfig/libtiff-4.pc /tiff-build/lib/pkgconfig/tiff.pc
