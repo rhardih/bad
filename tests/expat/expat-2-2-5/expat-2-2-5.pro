@@ -17,6 +17,10 @@ android {
     BUILD_PATH = $$(BAD_PATH)/extracted/expat-2.2.5-x86-build
   }
 
+  equals(ANDROID_TARGET_ARCH, arm64-v8a) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/expat-2.2.5-arm64-v8a-build
+  }
+
   LIBS += -L$$BUILD_PATH/lib/ -lexpat
   INCLUDEPATH += $$BUILD_PATH/include
 

@@ -21,7 +21,7 @@ RUN wget -O libiconv-$VERSION.tar.gz \
 
 WORKDIR /libiconv-$VERSION
 
-ENV PATH $PATH:/$PLATFORM-toolchain/bin
+ENV PATH /$PLATFORM-toolchain/bin:$PATH
 
 RUN ./configure \
   --host=$HOST \

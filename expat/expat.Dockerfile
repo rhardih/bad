@@ -14,6 +14,7 @@ RUN apt-get update && apt-get -y install \
   autoconf \
   libtool
 
+# TODO: Fix R_2_2_5 explicit version dependence
 RUN wget -O $VERSION.tar.bz2 \
   https://github.com/libexpat/libexpat/releases/download/R_2_2_5/expat-$VERSION.tar.bz2 && \
   tar -xjvf $VERSION.tar.bz2 && \
@@ -21,7 +22,7 @@ RUN wget -O $VERSION.tar.bz2 \
 
 WORKDIR /expat-$VERSION
 
-ENV PATH $PATH:/$PLATFORM-toolchain/bin
+ENV PATH /$PLATFORM-toolchain/bin:$PATH
 
 RUN autoreconf -vfi
 

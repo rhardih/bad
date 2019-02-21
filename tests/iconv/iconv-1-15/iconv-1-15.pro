@@ -17,6 +17,10 @@ android {
     BUILD_PATH = $$(BAD_PATH)/extracted/iconv-1.15-x86-build
   }
 
+  equals(ANDROID_TARGET_ARCH, arm64-v8a) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/iconv-1.15-arm64-v8a-build
+  }
+
   LIBS += -L$$BUILD_PATH/lib/ -liconv
   INCLUDEPATH += $$BUILD_PATH/include
 
