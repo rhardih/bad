@@ -1,11 +1,13 @@
 ARG PLATFORM=android-23
-ARG STAND_TAG=r18b--$PLATFORM--arm-linux-androideabi-4.9
+ARG TOOLCHAIN=arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
 FROM bad-leptonica:1.74.4-$ARCH AS leptonica-dep
 
-FROM rhardih/stand:$STAND_TAG
+# No need to use a stand container, if we're installing a full toolchain anyway
+FROM ubuntu:latest
 
+ARG ABI=armeabi-v7a
 # Copy value of platform into final environment
 ARG PLATFORM
 ENV PLATFORM $PLATFORM
@@ -51,7 +53,7 @@ WORKDIR build
 
 RUN cmake \
   -G "Android Gradle - Ninja" \
-  -D ANDROID_ABI=armeabi-v7a \
+  -D ANDROID_ABI=$ABI \
   -D ANDROID_NATIVE_API_LEVEL=23 \
   -D BUILD_TESTS=OFF \
   -D BUILD_TRAINING_TOOLS=OFF \
@@ -62,5 +64,5 @@ RUN cmake \
   -D CPPAN_BUILD=OFF \
   ..
  
-RUN ninja -j8
+RUN ninja -j4
 RUN ninja install

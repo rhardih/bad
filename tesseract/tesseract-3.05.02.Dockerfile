@@ -31,8 +31,8 @@ COPY tesseract/patches/3.05.02/configure.ac.patch configure.ac.patch
 
 RUN patch < configure.ac.patch
 
-ENV PATH $PATH:/$PLATFORM-toolchain/bin
-ENV PKG_CONFIG_PATH /leptonica-build/lib/pkgconfig/
+ENV PATH /$PLATFORM-toolchain/bin:$PATH
+ENV PKG_CONFIG_PATH /leptonica-build/lib/pkgconfig:/tiff-build/lib/pkgconfig
 
 RUN ./autogen.sh
 
@@ -43,10 +43,9 @@ RUN ./autogen.sh
 # See the following issue for further info:
 # https://github.com/android-ndk/ndk/issues/442
 RUN ./configure \
-   ac_cv_c_bigendian=no \
+  ac_cv_c_bigendian=no \
   --host=$HOST \
-  --with-extra-libraries=/leptonica-build/lib \
-	--disable-largefile \
+  --disable-largefile \
   --prefix=/tesseract-build/
 
 RUN make -j4 && make install

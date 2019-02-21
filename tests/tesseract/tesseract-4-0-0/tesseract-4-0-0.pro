@@ -15,6 +15,12 @@ android {
     TIFF_BUILD_PATH = $$(BAD_PATH)/extracted/tiff-4.0.10-armv7-a-build
   }
 
+  equals(ANDROID_TARGET_ARCH, arm64-v8a) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/tesseract-4.0.0-arm64-v8a-build
+    LEPT_BUILD_PATH = $$(BAD_PATH)/extracted/leptonica-1.74.4-arm64-v8a-build
+    TIFF_BUILD_PATH = $$(BAD_PATH)/extracted/tiff-4.0.10-arm64-v8a-build
+  }
+
   equals(ANDROID_TARGET_ARCH, x86) {
     BUILD_PATH = $$(BAD_PATH)/extracted/tesseract-4.0.0-x86-build
     LEPT_BUILD_PATH = $$(BAD_PATH)/extracted/leptonica-1.74.4-x86-build

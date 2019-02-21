@@ -17,6 +17,10 @@ android {
     BUILD_PATH = $$(BAD_PATH)/extracted/tiff-4.0.10-x86-build
   }
 
+  equals(ANDROID_TARGET_ARCH, arm64-v8a) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/tiff-4.0.10-arm64-v8a-build
+  }
+
   LIBS += -L$$BUILD_PATH/lib/ -ltiff
   INCLUDEPATH += $$BUILD_PATH/include
 

@@ -23,7 +23,7 @@ RUN wget -O tiff-$VERSION.tar.gz \
 
 WORKDIR /tiff-$VERSION
 
-ENV PATH $PATH:/$PLATFORM-toolchain/bin
+ENV PATH /$PLATFORM-toolchain/bin:$PATH
 
 # Acquire newer versions of .guess and .sub files for configure
 
