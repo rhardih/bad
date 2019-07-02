@@ -13,6 +13,10 @@ android {
     BUILD_PATH = $$(BAD_PATH)/extracted/openssl-1.0.2p-armv7-a-build
   }
 
+  equals(ANDROID_TARGET_ARCH, arm64-v8a) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/openssl-1.0.2p-arm64-v8a-build
+  }
+
   equals(ANDROID_TARGET_ARCH, x86) {
     BUILD_PATH = $$(BAD_PATH)/extracted/openssl-1.0.2p-x86-build
   }
