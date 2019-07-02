@@ -30,6 +30,12 @@ WORKDIR /gdal-$VERSION
 
 ENV PATH $PATH:/$PLATFORM-toolchain/bin
 
+# Changing default linker here, otherwise the error below is thrown for
+# arm64-v8a builds:
+#
+#  /bin/bash /gdal-2.3.1/libtool --mode=link --silent aarch64-linux-android-g++ gdalinfo_bin.lo  /gdal-2.3.1/libgdal.la  -o gdalinfo /android-23-toolchain/bin/../lib/gcc/aarch64-linux-android/4.9.x/../../../../aarch64-linux-android/bin/ld: warning: libproj.so, needed by /gdal-2.3.1/.libs/libgdal.so, not found (try using -rpath or -rpath-link)
+ENV LDFLAGS=-fuse-ld=gold
+
 RUN ./configure \
   --with-proj=/proj-build \
   --host=$HOST \

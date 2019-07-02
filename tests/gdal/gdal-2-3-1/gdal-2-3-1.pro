@@ -14,6 +14,11 @@ android {
     PROJ_BUILD_PATH = $$(BAD_PATH)/extracted/proj-4.9.3-armv7-a-build
   }
 
+  equals(ANDROID_TARGET_ARCH, arm64-v8a) {
+    PROJ_BUILD_PATH = $$(BAD_PATH)/extracted/proj-4.9.3-arm64-v8a-build
+    BUILD_PATH = $$(BAD_PATH)/extracted/gdal-2.3.1-arm64-v8a-build
+  }
+
   equals(ANDROID_TARGET_ARCH, x86) {
     BUILD_PATH = $$(BAD_PATH)/extracted/gdal-2.3.1-x86-build
     PROJ_BUILD_PATH = $$(BAD_PATH)/extracted/proj-4.9.3-x86-build
