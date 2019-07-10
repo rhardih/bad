@@ -1,7 +1,8 @@
 ARG PLATFORM=android-21
 ARG TOOLCHAIN=arm-linux-androideabi-4.9
+ARG NDK_REVISION=r18b
 
-FROM rhardih/stand:r10e--$PLATFORM--$TOOLCHAIN
+FROM rhardih/stand:$NDK_REVISION--$PLATFORM--$TOOLCHAIN
 
 ARG PLATFORM
 ENV PLATFORM $PLATFORM
@@ -19,7 +20,7 @@ ARG MACHINE=armv7
 ARG SYSTEM=android
 ARG ARCH=arm
 ARG CROSS_COMPILE=arm-linux-androideabi-
-ARG OS_COMPILER=android-armv7
+ARG OS_COMPILER=android-arm
 
 RUN apt-get update && apt-get -y install \
   wget
@@ -40,6 +41,7 @@ ENV PATH=$PATH:/$PLATFORM-toolchain/bin \
   ANDROID_EABI=$ANDROID_EABI \
   ANDROID_API=$PLATFORM \
   ANDROID_TOOLCHAIN=/$PLATFORM-toolchain/bin \
+  ANDROID_NDK_HOME=/$PLATFORM-toolchain \
   MACHINE=$MACHINE \
   SYSTEM=$SYSTEM \
   ARCH=$ARCH \

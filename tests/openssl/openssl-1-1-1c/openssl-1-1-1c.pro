@@ -9,6 +9,10 @@ TEMPLATE = app
 SOURCES +=  tst_openssl_1_1_1c.cpp
 
 android {
+  equals(ANDROID_TARGET_ARCH, armeabi-v7a) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/openssl-1.1.1c-armv7-a-build
+  }
+
   equals(ANDROID_TARGET_ARCH, arm64-v8a) {
     BUILD_PATH = $$(BAD_PATH)/extracted/openssl-1.1.1c-arm64-v8a-build
   }

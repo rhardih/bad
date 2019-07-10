@@ -19,6 +19,13 @@ openssl-arm64-v8a/%:
 		--build-arg OS_COMPILER=linux-aarch64 \
 		-t bad-openssl:${@F}-arm64-v8a -f openssl/openssl.Dockerfile ${BUILD_ARGS} .
 
+
+openssl-armv7-a/1.0.2p:
+	docker build --build-arg VERSION=1.0.2p \
+		--build-arg NDK_REVISION=r10e \
+		--build-arg OS_COMPILER=android-armv7 \
+		-t bad-openssl:1.0.2p-armv7-a -f openssl/openssl.Dockerfile ${BUILD_ARGS} .
+
 openssl-armv7-a/%:
 	docker build --build-arg VERSION=${@F} \
 		-t bad-openssl:${@F}-armv7-a -f openssl/openssl.Dockerfile ${BUILD_ARGS} .
