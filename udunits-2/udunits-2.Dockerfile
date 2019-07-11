@@ -19,7 +19,9 @@ RUN apt-get update && apt-get -y install \
   pkg-config \
   texinfo \
   autoconf \
-  libtool
+  libtool \
+  flex \
+  bison
 
 RUN wget -O $VERSION.tar.gz \
 	https://github.com/Unidata/UDUNITS-2/archive/v$VERSION.tar.gz && \

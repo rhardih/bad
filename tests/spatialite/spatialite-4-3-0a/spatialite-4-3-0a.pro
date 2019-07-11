@@ -14,6 +14,11 @@ android {
     ARCH=armv7-a
   }
 
+  equals(ANDROID_TARGET_ARCH, arm64-v8a) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/sqlite3-3.21.0-arm64-v8a-build
+    ARCH=arm64-v8a
+  }
+
   equals(ANDROID_TARGET_ARCH, x86) {
     BUILD_PATH = $$(BAD_PATH)/extracted/sqlite3-3.21.0-x86-build
     ARCH=x86

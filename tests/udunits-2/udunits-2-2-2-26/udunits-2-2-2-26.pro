@@ -14,6 +14,11 @@ android {
     EXPAT_BUILD_PATH = $$(BAD_PATH)/extracted/expat-2.2.5-armv7-a-build
   }
 
+  equals(ANDROID_TARGET_ARCH, arm64-v8a) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/udunits-2-2.2.26-arm64-v8a-build
+    EXPAT_BUILD_PATH = $$(BAD_PATH)/extracted/expat-2.2.5-arm64-v8a-build
+  }
+
   equals(ANDROID_TARGET_ARCH, x86) {
     BUILD_PATH = $$(BAD_PATH)/extracted/udunits-2-2.2.26-x86-build
     EXPAT_BUILD_PATH = $$(BAD_PATH)/extracted/expat-2.2.5-x86-build

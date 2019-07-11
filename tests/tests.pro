@@ -14,7 +14,7 @@ SUBDIRS += \
     udunits-2 \
     sqlite \
     spatialite \
-    opencv
+    opencv \
     curl
 
 BAD_PATH=$$(BAD_PATH)

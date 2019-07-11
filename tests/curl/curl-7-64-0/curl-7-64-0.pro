@@ -13,6 +13,10 @@ android {
     BUILD_PATH = $$(BAD_PATH)/extracted/curl-7.64.0-armv7-a-build
   }
 
+  equals(ANDROID_TARGET_ARCH, arm64-v8a) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/curl-7.64.0-arm64-v8a-build
+  }
+
   equals(ANDROID_TARGET_ARCH, x86) {
     BUILD_PATH = $$(BAD_PATH)/extracted/curl-7.64.0-x86-build
   }

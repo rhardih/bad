@@ -12,6 +12,8 @@ FROM rhardih/stand:r18b--$PLATFORM--$TOOLCHAIN
 ARG HOST=arm-linux-androideabi
 ARG PLATFORM
 ENV PLATFORM $PLATFORM
+ARG ARCH
+ENV ARCH $ARCH
 
 # List of available versions can be found at
 # http://www.gaia-gis.it/gaia-sins/libspatialite-sources/
@@ -70,6 +72,14 @@ RUN echo "-L/geos-build/lib -lgeos" >> cflags.tmp
 # Linking log remediates the following run time error:
 #   UnsatisfiedLinkError: dlopen failed: cannot locate symbol "__android_log_print"
 RUN echo "-L/$PLATFORM-toolchain/sysroot/usr/lib -llog" >> ldflags.tmp
+
+# This is a bit silly, but somehow libgeos_c is needed and incurs a dependency
+# for libc++_shared.so only on arm64-v8a, and I haven't found a better way to
+# link it
+RUN if [ "$ARCH" = "arm64-v8a" ]; then \
+      echo "-lgeos_c" >> cflags.tmp; \
+      echo "-L/$PLATFORM-toolchain/aarch64-linux-android/lib -lc++_shared" >> ldflags.tmp; \
+    fi
 
 RUN CFLAGS=$(tr "\r\n" " " < cflags.tmp) \
   LDFLAGS=$(tr "\r\n" " " < ldflags.tmp) \
