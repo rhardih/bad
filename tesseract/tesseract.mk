@@ -41,7 +41,6 @@ tesseract-x86/4.0.0: tiff-x86/4.0.10 leptonica-x86/1.74.4
 	docker build \
 		--build-arg TOOLCHAIN=x86-4.9 \
 		--build-arg ARCH=x86 \
-		--build-arg ABI=x86 \
 		-t bad-tesseract:4.0.0-x86 \
 		-f tesseract/tesseract-4.0.0.Dockerfile ${BUILD_ARGS} .
 
@@ -49,7 +48,6 @@ tesseract-arm64-v8a/4.0.0: tiff-arm64-v8a/4.0.10 leptonica-arm64-v8a/1.74.4
 	docker build \
 		--build-arg TOOLCHAIN=aarch64-linux-android-4.9 \
 		--build-arg ARCH=arm64-v8a \
-		--build-arg ABI=arm64-v8a \
 		-t bad-tesseract:4.0.0-arm64-v8a \
 		-f tesseract/tesseract-4.0.0.Dockerfile ${BUILD_ARGS} .
 
