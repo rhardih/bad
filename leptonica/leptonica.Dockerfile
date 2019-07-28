@@ -29,7 +29,9 @@ RUN wget -O $VERSION.tar.gz \
 WORKDIR /leptonica-$VERSION
 
 ENV PATH $PATH:/$PLATFORM-toolchain/bin
-ENV PKG_CONFIG_PATH /tiff-build/lib/pkgconfig
+
+ENV LIBTIFF_LIBS -L/tiff-build/lib -ltiff
+ENV LIBTIFF_CFLAGS -I/tiff-build/include
 
 RUN ./autobuild
 
