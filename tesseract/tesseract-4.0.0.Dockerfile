@@ -19,14 +19,17 @@ RUN apt-get update && apt-get -y install \
   cmake \
   pkg-config
 
-ENV STEP 06
-
+# Build version with fix for missing glob.h on Android.
+#
+# See the following for diff against origin:
+# VERSION: [4.0.0, 4.1.0]
+# https://github.com/tesseract-ocr/tesseract/compare/$VERSION...rhardih:$VERSION-rhardih
 RUN wget -O $VERSION.tar.gz \
-  https://github.com/rhardih/tesseract/archive/$VERSION-rhardih-$STEP.tar.gz && \
+  https://github.com/rhardih/tesseract/archive/$VERSION-rhardih.tar.gz && \
   tar -xzvf $VERSION.tar.gz && \
   rm $VERSION.tar.gz
 
-WORKDIR /tesseract-$VERSION-rhardih-$STEP
+WORKDIR /tesseract-$VERSION-rhardih
 
 ENV PKG_CONFIG_PATH /leptonica-build/lib/pkgconfig/
 
