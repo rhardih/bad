@@ -37,20 +37,26 @@ tesseract-armv7-a/3.05.02: tiff-armv7-a/4.0.10 leptonica-armv7-a/1.74.4
 
 # 4.0.0
 
-tesseract-x86/4.0.0: tiff-x86/4.0.10 leptonica-x86/1.74.4
+tesseract-x86/4.%: tiff-x86/4.0.10 leptonica-x86/1.74.4
 	docker build \
+		--build-arg VERSION=${@F} \
 		--build-arg TOOLCHAIN=x86-4.9 \
 		--build-arg ARCH=x86 \
-		-t bad-tesseract:4.0.0-x86 \
+		--build-arg ABI=x86 \
+		-t bad-tesseract:${@F}-x86 \
 		-f tesseract/tesseract-4.0.0.Dockerfile ${BUILD_ARGS} .
 
-tesseract-arm64-v8a/4.0.0: tiff-arm64-v8a/4.0.10 leptonica-arm64-v8a/1.74.4
+tesseract-arm64-v8a/4.%: tiff-arm64-v8a/4.0.10 leptonica-arm64-v8a/1.74.4
 	docker build \
+		--build-arg VERSION=${@F} \
 		--build-arg TOOLCHAIN=aarch64-linux-android-4.9 \
 		--build-arg ARCH=arm64-v8a \
-		-t bad-tesseract:4.0.0-arm64-v8a \
+		--build-arg ABI=arm64-v8a \
+		-t bad-tesseract:${@F}-arm64-v8a \
 		-f tesseract/tesseract-4.0.0.Dockerfile ${BUILD_ARGS} .
 
-tesseract-armv7-a/4.0.0: tiff-armv7-a/4.0.10 leptonica-armv7-a/1.74.4
-	docker build -t bad-tesseract:4.0.0-armv7-a \
+tesseract-armv7-a/4.%: tiff-armv7-a/4.0.10 leptonica-armv7-a/1.74.4
+	docker build \
+		--build-arg VERSION=${@F} \
+		-t bad-tesseract:${@F}-armv7-a \
 		-f tesseract/tesseract-4.0.0.Dockerfile ${BUILD_ARGS} .

@@ -11,6 +11,7 @@ FROM rhardih/stand:r18b--$PLATFORM--$TOOLCHAIN
 ARG PLATFORM
 ENV PLATFORM $PLATFORM
 ARG VERSION=4.0.0
+ARG ABI=armeabi-v7a
 
 COPY --from=leptonica-dep /leptonica-build /leptonica-build
 
@@ -37,13 +38,14 @@ RUN mkdir build
 WORKDIR build
 
 RUN cmake \
-  -D CMAKE_C_COMPILER=/$PLATFORM-toolchain/bin/clang \
-  -D CMAKE_CXX_COMPILER=/$PLATFORM-toolchain/bin/clang++ \
-  -D ANDROID=ON \
   -D BUILD_TESTS=OFF \
   -D BUILD_TRAINING_TOOLS=OFF \
+  -D CMAKE_ANDROID_ARCH_ABI=$ABI \
+  -D CMAKE_ANDROID_STANDALONE_TOOLCHAIN=/$PLATFORM-toolchain \
   -D CMAKE_BUILD_TYPE=Release \
   -D CMAKE_INSTALL_PREFIX:PATH=/tesseract-build \
+  -D CMAKE_SYSTEM_NAME=Android \
+  -D CMAKE_SYSTEM_VERSION=23 \
   -D CPPAN_BUILD=OFF \
   ..
 
