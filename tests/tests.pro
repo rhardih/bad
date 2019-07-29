@@ -19,3 +19,6 @@ SUBDIRS += \
 
 BAD_PATH=$$(BAD_PATH)
 isEmpty(BAD_PATH): error("Variable BAD_PATH is empty. Builds will fail unless set.")
+
+tesseract.depends = Utils
+gdal.depends = Utils
