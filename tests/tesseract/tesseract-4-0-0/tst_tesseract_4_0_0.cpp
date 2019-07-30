@@ -64,7 +64,7 @@ void tesseract_4_0_0::test_GetUTF8Text()
   QString expected = \
       "This is a lot of 12 point text to test the\n" \
       "ocr code and see if it works on all types\n" \
-      "of file format.\n\n" \
+      "of file format.\n" \
       "The quick brown dog jumped over the\n" \
       "lazy fox. The quick brown dog jumped\n" \
       "over the lazy fox. The quick brown dog\n" \
