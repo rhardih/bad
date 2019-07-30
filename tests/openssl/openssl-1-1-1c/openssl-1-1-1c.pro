@@ -17,6 +17,10 @@ android {
     BUILD_PATH = $$(BAD_PATH)/extracted/openssl-1.1.1c-arm64-v8a-build
   }
 
+  equals(ANDROID_TARGET_ARCH, x86) {
+    BUILD_PATH = $$(BAD_PATH)/extracted/openssl-1.1.1c-x86-build
+  }
+
   LIBS += -L$$BUILD_PATH/lib/ -lcrypto -lssl
   INCLUDEPATH += $$BUILD_PATH/include
 
