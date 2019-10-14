@@ -2,6 +2,7 @@ ARG PLATFORM=android-23
 ARG TOOLCHAIN=arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
+FROM bad-tiff:4.0.10-$ARCH AS tiff-dep
 FROM bad-leptonica:1.74.4-$ARCH AS leptonica-dep
 
 # No need to use a stand container, if we're installing a full toolchain anyway
@@ -13,6 +14,7 @@ ENV PLATFORM $PLATFORM
 ARG VERSION=4.0.0
 ARG ABI=armeabi-v7a
 
+COPY --from=tiff-dep /tiff-build /tiff-build
 COPY --from=leptonica-dep /leptonica-build /leptonica-build
 
 RUN apt-get update && apt-get -y install \
@@ -47,6 +49,7 @@ RUN cmake \
   -D CMAKE_SYSTEM_NAME=Android \
   -D CMAKE_SYSTEM_VERSION=23 \
   -D CPPAN_BUILD=OFF \
+  -D CMAKE_CXX_FLAGS="-Qunused-arguments -Wl,-rpath-link,/tiff-build/lib" \
   ..
 
 RUN make -j4
