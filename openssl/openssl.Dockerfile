@@ -53,8 +53,8 @@ RUN ./Configure \
   --openssldir=/openssl-build/ \
   shared $OS_COMPILER
 
-# SHLIB_VERSION_NUMBER and SHLIB_EXT is set in order to build versionless copies
-# since Android doesn't support versioned shared libs.
-RUN make -j depend && \
-  make -j SHLIB_VERSION_NUMBER='' SHLIB_EXT='.so' build_libs && \
-  make SHLIB_VERSION_NUMBER='' SHLIB_EXT='.so' install
+# CALC_VERSIONS is set in order to build versionless copies since Android
+# doesn't support versioned shared libs.
+RUN make -j4 depend && \
+  make -j4 CALC_VERSIONS="SHLIB_COMPAT=; SHLIB_SOVER=" build_libs && \
+  make install
