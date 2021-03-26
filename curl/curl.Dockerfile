@@ -24,10 +24,12 @@ RUN wget -O libcurl-$VERSION.tar.gz \
 WORKDIR /curl-$VERSION
 
 ENV PATH $PATH:/$PLATFORM-toolchain/bin
+ENV LDFLAGS -R/openssl-build/lib
 
 RUN ./configure \
-    --with-ssl=/openssl-build \
+    --with-ssl \
     --host=$HOST \
     --prefix=/curl-build/
 
-# RUN make -j4 && make install
+RUN make -j
+RUN make install
