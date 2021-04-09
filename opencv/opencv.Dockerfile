@@ -57,4 +57,4 @@ RUN cmake \
   -D CMAKE_INSTALL_PREFIX:PATH=/opencv-build \
   ..
 
-RUN make -j4 && make install
+RUN make -j && make install

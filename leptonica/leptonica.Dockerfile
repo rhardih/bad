@@ -46,4 +46,4 @@ RUN ./configure \
   --without-libopenjpeg \
   --prefix=/leptonica-build/
 
-RUN make -j4 && make install
+RUN make -j && make install

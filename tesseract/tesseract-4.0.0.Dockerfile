@@ -52,5 +52,5 @@ RUN cmake \
   -D CMAKE_CXX_FLAGS="-Qunused-arguments -Wl,-rpath-link,/tiff-build/lib" \
   ..
 
-RUN make -j4
+RUN make -j
 RUN make install

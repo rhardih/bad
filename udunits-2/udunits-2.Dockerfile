@@ -41,4 +41,4 @@ RUN CFLAGS=$(pkg-config expat --cflags) \
   --host=$HOST \
   --prefix=/udunits-2-build/
 
-RUN make -j4 && make install
+RUN make -j && make install

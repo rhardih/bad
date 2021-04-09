@@ -25,4 +25,4 @@ RUN ./configure \
 	--host=$HOST \
   --prefix=/curl-build/
 
-RUN make -j4 && make install
+RUN make -j && make install

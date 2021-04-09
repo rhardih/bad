@@ -90,4 +90,4 @@ RUN CFLAGS=$(tr "\r\n" " " < cflags.tmp) \
   --disable-examples \
   --prefix=/spatialite-build/
 
-RUN make -j4 && make install
+RUN make -j && make install

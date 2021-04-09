@@ -29,5 +29,5 @@ RUN ./configure \
   --host=$HOST \
   --prefix=/geos-build/
 
-RUN make -j4 && make install
+RUN make -j && make install
 

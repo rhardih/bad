@@ -27,4 +27,4 @@ RUN ./configure \
   --host=$HOST \
   --prefix=/iconv-build/
 
-RUN make -j4 && make install
+RUN make -j && make install
