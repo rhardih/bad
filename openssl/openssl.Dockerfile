@@ -1,4 +1,4 @@
-ARG PLATFORM=android-21
+ARG PLATFORM=android-23
 ARG TOOLCHAIN=arm-linux-androideabi-4.9
 ARG NDK_REVISION=r18b
 
@@ -16,7 +16,7 @@ ARG VERSION
 # This is a base set of environment variables as seen in
 # https://wiki.openssl.org/images/7/70/Setenv-android.sh
 ARG ANDROID_EABI=arm-linux-androideabi-4.9
-ARG MACHINE=armv7
+ARG MACHINE=armv8-a
 ARG SYSTEM=android
 ARG ARCH=arm
 ARG CROSS_COMPILE=arm-linux-androideabi-

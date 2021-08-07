@@ -13,7 +13,7 @@ openssl-arm64-v8a/%:
 	docker build --build-arg VERSION=${@F} \
 		--build-arg TOOLCHAIN=aarch64-linux-android-4.9 \
 		--build-arg ANDROID_EABI=aarch64-linux-android \
-		--build-arg ANDROID_API=android-21 \
+		--build-arg ANDROID_API=android-23 \
 		--build-arg MACHINE=aarch64 \
 		--build-arg ARCH=arm64-v8a \
 		--build-arg CROSS_COMPILE=aarch64-linux-android- \

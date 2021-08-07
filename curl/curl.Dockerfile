@@ -26,10 +26,10 @@ WORKDIR /curl-$VERSION
 ENV PATH $PATH:/$PLATFORM-toolchain/bin
 ENV LDFLAGS -R/openssl-build/lib
 
-RUN ./configure \
-    --with-ssl \
-    --host=$HOST \
-    --prefix=/curl-build/
+RUN LDFLAGS=-Wl,-R/openssl-build/lib ./configure \
+    --with-ssl=/openssl-build \
+    --host=$HOST\
+    --prefix=/curl-build/ 
 
 RUN make -j
 RUN make install
