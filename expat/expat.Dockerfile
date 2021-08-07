@@ -30,4 +30,4 @@ RUN ./configure \
 	--host=$HOST \
   --prefix=/expat-build/
 
-RUN make -j4 && make install
+RUN make -j && make install

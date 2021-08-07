@@ -48,4 +48,4 @@ RUN ./configure \
   --disable-largefile \
   --prefix=/tesseract-build/
 
-RUN make -j4 && make install
+RUN make -j && make install

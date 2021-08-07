@@ -31,5 +31,4 @@ RUN LDFLAGS=-Wl,-R/openssl-build/lib ./configure \
     --host=$HOST\
     --prefix=/curl-build/ 
 
-RUN make -j
-RUN make install
+RUN make -j && make install

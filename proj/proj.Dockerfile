@@ -27,4 +27,4 @@ RUN ./configure \
   --host=$HOST \
   --prefix=/proj-build/
 
-RUN make -j4 && make install
+RUN make -j && make install

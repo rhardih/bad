@@ -46,4 +46,4 @@ RUN ./configure \
   --disable-tcl \
   --prefix=/sqlite3-build/
 
-RUN make -j4  && make install
+RUN make -j  && make install
