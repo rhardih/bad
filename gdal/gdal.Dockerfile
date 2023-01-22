@@ -41,4 +41,4 @@ RUN ./configure \
   --host=$HOST \
   --prefix=/gdal-build/
 
-RUN make -j && make install
+RUN make -j 4 && make install
